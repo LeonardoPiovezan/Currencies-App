@@ -14,6 +14,10 @@
 		1AEC0BE8220A5B4800734977 /* CurrenciesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0BE7220A5B4800734977 /* CurrenciesUITests.swift */; };
 		1AEC0C01220A602300734977 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C00220A602300734977 /* Coordinator.swift */; };
 		1AEC0C03220A604A00734977 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C02220A604A00734977 /* CodeView.swift */; };
+		1AEC0C05220A632000734977 /* DefaultContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C04220A632000734977 /* DefaultContainer.swift */; };
+		1AEC0C07220A634B00734977 /* DefaultContainer+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C06220A634B00734977 /* DefaultContainer+Services.swift */; };
+		1AEC0C09220A636F00734977 /* DefaultContainer+Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C08220A636F00734977 /* DefaultContainer+Repositories.swift */; };
+		1AEC0C0B220A638D00734977 /* DefaultContainer+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C0A220A638D00734977 /* DefaultContainer+Views.swift */; };
 		338BA15490796F7964E5897A /* Pods_CurrenciesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989D4BB2C716C6FA413FAEB /* Pods_CurrenciesUITests.framework */; };
 		41FBA0F91599357689FD4B31 /* Pods_Currencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C36F3766C8C121AEB54006 /* Pods_Currencies.framework */; };
 		743CBF3DC82966055DE03A70 /* Pods_CurrenciesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7982F794E22399988D6968B8 /* Pods_CurrenciesTests.framework */; };
@@ -51,6 +55,10 @@
 		1AEC0BE9220A5B4800734977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AEC0C00220A602300734977 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		1AEC0C02220A604A00734977 /* CodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
+		1AEC0C04220A632000734977 /* DefaultContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultContainer.swift; sourceTree = "<group>"; };
+		1AEC0C06220A634B00734977 /* DefaultContainer+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultContainer+Services.swift"; sourceTree = "<group>"; };
+		1AEC0C08220A636F00734977 /* DefaultContainer+Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultContainer+Repositories.swift"; sourceTree = "<group>"; };
+		1AEC0C0A220A638D00734977 /* DefaultContainer+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultContainer+Views.swift"; sourceTree = "<group>"; };
 		1D1D52F8C1988A1F11F69D03 /* Pods-CurrenciesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrenciesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CurrenciesTests/Pods-CurrenciesTests.release.xcconfig"; sourceTree = "<group>"; };
 		2C2138FCD4CB5EFEC166FC26 /* Pods-Currencies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Currencies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Currencies/Pods-Currencies.release.xcconfig"; sourceTree = "<group>"; };
 		7982F794E22399988D6968B8 /* Pods_CurrenciesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrenciesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,19 +122,19 @@
 		1AEC0BC6220A5B4400734977 /* Currencies */ = {
 			isa = PBXGroup;
 			children = (
-				1AEC0BFD220A5EB400734977 /* Container */,
-				1AEC0BFC220A5E9B00734977 /* Entity */,
-				1AEC0BFB220A5E9100734977 /* Constants */,
-				1AEC0BFA220A5E7F00734977 /* Coordinator */,
-				1AEC0BF9220A5E5900734977 /* Components */,
-				1AEC0BF8220A5E2900734977 /* CodeView */,
-				1AEC0BF7220A5E2200734977 /* Services */,
-				1AEC0BF6220A5E0F00734977 /* Repositories */,
-				1AEC0BF5220A5E0600734977 /* Modules */,
 				1AEC0BC7220A5B4400734977 /* AppDelegate.swift */,
 				1AEC0BCE220A5B4800734977 /* Assets.xcassets */,
-				1AEC0BD0220A5B4800734977 /* LaunchScreen.storyboard */,
+				1AEC0BF8220A5E2900734977 /* CodeView */,
+				1AEC0BF9220A5E5900734977 /* Components */,
+				1AEC0BFB220A5E9100734977 /* Constants */,
+				1AEC0BFD220A5EB400734977 /* Container */,
+				1AEC0BFA220A5E7F00734977 /* Coordinator */,
+				1AEC0BFC220A5E9B00734977 /* Entity */,
 				1AEC0BD3220A5B4800734977 /* Info.plist */,
+				1AEC0BD0220A5B4800734977 /* LaunchScreen.storyboard */,
+				1AEC0BF5220A5E0600734977 /* Modules */,
+				1AEC0BF6220A5E0F00734977 /* Repositories */,
+				1AEC0BF7220A5E2200734977 /* Services */,
 			);
 			path = Currencies;
 			sourceTree = "<group>";
@@ -210,6 +218,10 @@
 		1AEC0BFD220A5EB400734977 /* Container */ = {
 			isa = PBXGroup;
 			children = (
+				1AEC0C04220A632000734977 /* DefaultContainer.swift */,
+				1AEC0C06220A634B00734977 /* DefaultContainer+Services.swift */,
+				1AEC0C08220A636F00734977 /* DefaultContainer+Repositories.swift */,
+				1AEC0C0A220A638D00734977 /* DefaultContainer+Views.swift */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -497,9 +509,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AEC0C0B220A638D00734977 /* DefaultContainer+Views.swift in Sources */,
 				1AEC0C03220A604A00734977 /* CodeView.swift in Sources */,
+				1AEC0C05220A632000734977 /* DefaultContainer.swift in Sources */,
 				1AEC0C01220A602300734977 /* Coordinator.swift in Sources */,
+				1AEC0C09220A636F00734977 /* DefaultContainer+Repositories.swift in Sources */,
 				1AEC0BC8220A5B4400734977 /* AppDelegate.swift in Sources */,
+				1AEC0C07220A634B00734977 /* DefaultContainer+Services.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

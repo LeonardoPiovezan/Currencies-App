@@ -7,7 +7,9 @@
 //
 
 extension DefaultContainer {
-  func registerViews() {
-    
-  }
+    func registerViews() {
+        self.container.register(ExchangeRatesView.self) { _ in
+            ExchangeRatesView()
+        }
+    }
 }

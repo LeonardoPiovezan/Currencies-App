@@ -110,6 +110,15 @@
 		1AEC0BC6220A5B4400734977 /* Currencies */ = {
 			isa = PBXGroup;
 			children = (
+				1AEC0BFD220A5EB400734977 /* Container */,
+				1AEC0BFC220A5E9B00734977 /* Entity */,
+				1AEC0BFB220A5E9100734977 /* Constants */,
+				1AEC0BFA220A5E7F00734977 /* Coordinator */,
+				1AEC0BF9220A5E5900734977 /* Components */,
+				1AEC0BF8220A5E2900734977 /* CodeView */,
+				1AEC0BF7220A5E2200734977 /* Services */,
+				1AEC0BF6220A5E0F00734977 /* Repositories */,
+				1AEC0BF5220A5E0600734977 /* Modules */,
 				1AEC0BC7220A5B4400734977 /* AppDelegate.swift */,
 				1AEC0BCE220A5B4800734977 /* Assets.xcassets */,
 				1AEC0BD0220A5B4800734977 /* LaunchScreen.storyboard */,
@@ -134,6 +143,69 @@
 				1AEC0BE9220A5B4800734977 /* Info.plist */,
 			);
 			path = CurrenciesUITests;
+			sourceTree = "<group>";
+		};
+		1AEC0BF5220A5E0600734977 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		1AEC0BF6220A5E0F00734977 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		1AEC0BF7220A5E2200734977 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		1AEC0BF8220A5E2900734977 /* CodeView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CodeView;
+			sourceTree = "<group>";
+		};
+		1AEC0BF9220A5E5900734977 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		1AEC0BFA220A5E7F00734977 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		1AEC0BFB220A5E9100734977 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		1AEC0BFC220A5E9B00734977 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		1AEC0BFD220A5EB400734977 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Container;
 			sourceTree = "<group>";
 		};
 		91C93C99BCE8C7651EBA7FB0 /* Frameworks */ = {

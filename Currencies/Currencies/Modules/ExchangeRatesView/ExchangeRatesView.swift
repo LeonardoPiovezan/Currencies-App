@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Moya
 
 final class ExchangeRatesView: UIViewController {
     init() {
@@ -23,5 +24,12 @@ final class ExchangeRatesView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let provider = MoyaProvider<ExchangeRatesRouter>()
+        let test = ExchangeRatesRepositoryImpl(provider: provider)
+
+        test.getRatesFor(countryCode: "EUR") { (result) in
+            print(result)
+        }
+
     }
 }

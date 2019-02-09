@@ -8,8 +8,9 @@
 
 extension DefaultContainer {
     func registerViews() {
-        self.container.register(ExchangeRatesView.self) { _ in
-            ExchangeRatesView()
+        self.container.register(ExchangeRatesView.self) { resolver in
+            let service = resolver.resolve(ExchangeRatesService.self)!
+            return ExchangeRatesView(exchangeRatesService: service)
         }
     }
 }

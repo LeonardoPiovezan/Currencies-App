@@ -6,4 +6,9 @@
 //  Copyright © 2019 Leonardo Piovezan. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol LabelDescriptor {
+    var font: UIFont { get set }
+    var color: UIColor { get set }
+}

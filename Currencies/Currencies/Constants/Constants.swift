@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Constants {
     private init () {}
@@ -14,5 +15,11 @@ struct Constants {
     struct Network {
         private init() {}
         static let baseURL = "https://revolut.duckdns.org"
+    }
+
+    struct Font {
+        private init(){}
+        static let helveticaNeue = "HelveticaNeue"
+        static let helveticaNeueLight = "HelveticaNeue-Light"
     }
 }

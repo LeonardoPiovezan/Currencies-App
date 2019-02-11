@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+extension DefaultContainer {
+    func registerManagers() {
+        self.container.register(CurrencyNameManager.self) { _ in
+            return CurrencyNameManagerImpl()
+        }
+    }
+}

@@ -8,13 +8,17 @@
 
 import Foundation
 
-struct RateResult: Codable {
+struct RateResult: Codable, Equatable {
     let base: String
     let date: String
     let rates: [String: Double]
+
+    func getRateList() -> [Rate] {
+        return rates.map{ Rate(countryCode: $0, rate: $1) }
+    }
 }
 
-struct Rate {
+struct Rate: Equatable {
     let countryCode: String
     let rate: Double
 }

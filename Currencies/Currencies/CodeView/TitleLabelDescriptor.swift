@@ -6,4 +6,15 @@
 //  Copyright © 2019 Leonardo Piovezan. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct TitleLabelDescriptor: LabelDescriptor {
+    var font: UIFont
+
+    var color: UIColor
+
+    init() {
+        self.font = UIFont(name: Constants.Font.helveticaNeue, size: 17)!
+        self.color = .black
+    }
+}

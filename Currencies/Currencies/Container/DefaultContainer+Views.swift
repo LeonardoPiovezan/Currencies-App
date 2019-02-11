@@ -10,7 +10,8 @@ extension DefaultContainer {
     func registerViews() {
         self.container.register(ExchangeRatesView.self) { resolver in
             let service = resolver.resolve(ExchangeRatesService.self)!
-            return ExchangeRatesView(exchangeRatesService: service)
+            let currencyNameManager = resolver.resolve(CurrencyNameManager.self)!
+            return ExchangeRatesView(exchangeRatesService: service, currencyNameManager: currencyNameManager)
         }
     }
 }

@@ -14,11 +14,11 @@ struct RateResult: Codable, Equatable {
     let rates: [String: Double]
 
     func getRateList() -> [Rate] {
-        return rates.map{ Rate(countryCode: $0, rate: $1) }
+        return rates.map{ Rate(currencyCode: $0, rate: $1) }
     }
 }
 
 struct Rate: Equatable {
-    let countryCode: String
+    let currencyCode: String
     let rate: Double
 }

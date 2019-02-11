@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.1)
+  - FlagKit (2.0.1)
   - iOSSnapshotTestCase (5.0.2):
     - iOSSnapshotTestCase/SwiftSupport (= 5.0.2)
   - iOSSnapshotTestCase/Core (5.0.2)
@@ -25,6 +26,7 @@ PODS:
   - Swinject (2.5.0)
 
 DEPENDENCIES:
+  - FlagKit
   - KIF
   - Moya
   - Nimble
@@ -36,6 +38,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - FlagKit
     - iOSSnapshotTestCase
     - KIF
     - Moya
@@ -48,6 +51,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  FlagKit: 75c64346179f254d1753bebdc5b1f9cbe7890748
   iOSSnapshotTestCase: 2d51aa06775e95cecb0a1fb9c5c159ccd1dd4596
   KIF: f3d01c109ee9d1cfe6b0f2bb2aa278e807e971e2
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
@@ -58,6 +62,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   Swinject: 82cdb851f63f91bba974e3eca1d69780f2f7677e
 
-PODFILE CHECKSUM: fa2d63afc7c4086bb5109388611312bb09eacefc
+PODFILE CHECKSUM: 9cdcd397ef688f6f6482d67a02ccd10c3bd61c21
 
 COCOAPODS: 1.5.3

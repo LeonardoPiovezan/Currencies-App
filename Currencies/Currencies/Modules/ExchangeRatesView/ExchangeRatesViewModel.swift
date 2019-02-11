@@ -27,7 +27,7 @@ final class ExchangeRatesViewModel {
             switch result {
             case .success(let rateResult):
                 self?.rateResult = rateResult
-                self?.rates = rateResult.getRateList().sorted(by: { $1.countryCode > $0.countryCode })
+                self?.rates = rateResult.getRateList().sorted(by: { $1.currencyCode > $0.currencyCode })
                 self?.didReceiveRates?()
             case .failure(let error):
                 print(error)

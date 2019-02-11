@@ -10,4 +10,5 @@ import Foundation
 
 protocol CurrencyNameManager {
     func getNameFor(currencyCode: String) -> String
+    func getCountryNameFor(currencyCode: String) -> String
 }

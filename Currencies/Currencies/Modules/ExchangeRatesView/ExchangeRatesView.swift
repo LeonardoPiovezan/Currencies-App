@@ -72,8 +72,11 @@ extension ExchangeRatesView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rateCell") as! ExchangeRateCell
 
         let rate = self.viewModel.rates[indexPath.row]
-        cell.currencyCodeLabel.text = rate.countryCode
-        cell.currencyNameLabel.text = self.currencyNameManager.getNameFor(currencyCode: rate.countryCode)
+
+        cell.bindTo(rateFormatted: RateFormatted(rate: rate,
+                                                 currencyNameManager: self.currencyNameManager))
+//        cell.currencyCodeLabel.text = rate.countryCode
+//        cell.currencyNameLabel.text = self.currencyNameManager.getNameFor(currencyCode: rate.countryCode)
 
         return cell
     }

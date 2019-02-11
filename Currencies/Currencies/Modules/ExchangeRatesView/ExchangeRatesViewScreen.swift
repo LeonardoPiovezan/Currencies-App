@@ -21,8 +21,7 @@ final class ExchangeRatesViewScreen: UIView {
     lazy var tableView: UITableView = {
         return UITableView
             .Builder()
-//            .withSeparatorStyle(.none)
-            .withBackgroundColor(.red)
+            .withSeparatorStyle(.none)
             .build()
     }()
 

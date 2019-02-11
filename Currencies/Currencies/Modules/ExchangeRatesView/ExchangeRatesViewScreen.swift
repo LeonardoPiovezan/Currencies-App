@@ -12,10 +12,18 @@ import SnapKit
 final class ExchangeRatesViewScreen: UIView {
 
     lazy var label: UILabel = {
-        let label = UILabel()
-        label.text = "Test Label"
-        label.numberOfLines = 0
-        return label
+        return UILabel
+            .Builder()
+            .withDescriptor(TitleLabelDescriptor())
+            .build()
+    }()
+
+    lazy var tableView: UITableView = {
+        return UITableView
+            .Builder()
+//            .withSeparatorStyle(.none)
+            .withBackgroundColor(.red)
+            .build()
     }()
 
     init() {
@@ -31,15 +39,21 @@ final class ExchangeRatesViewScreen: UIView {
 extension ExchangeRatesViewScreen: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.label)
+        self.addSubview(self.tableView)
     }
 
     func setupConstraints() {
         self.label.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        self.tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     func setupAdditionalConfiguration() {
         self.backgroundColor = .white
+        label.text = "Test Label"
+        self.tableView.register(ExchangeRateCell.self, forCellReuseIdentifier: "rateCell")
     }
 }

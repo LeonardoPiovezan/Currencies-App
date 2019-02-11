@@ -23,6 +23,7 @@
 		1A9B28DC2210F0FC0014FA3A /* CurrencyNameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28DB2210F0FC0014FA3A /* CurrencyNameManager.swift */; };
 		1A9B28DE2210F1D80014FA3A /* CurrencyNameManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28DD2210F1D80014FA3A /* CurrencyNameManagerImpl.swift */; };
 		1A9B28E02210F2EA0014FA3A /* DefaultContainer+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28DF2210F2EA0014FA3A /* DefaultContainer+Manager.swift */; };
+		1A9B28E4221103760014FA3A /* RateFormatted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28E3221103760014FA3A /* RateFormatted.swift */; };
 		1AEC0BC8220A5B4400734977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0BC7220A5B4400734977 /* AppDelegate.swift */; };
 		1AEC0BCF220A5B4800734977 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AEC0BCE220A5B4800734977 /* Assets.xcassets */; };
 		1AEC0BD2220A5B4800734977 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEC0BD0220A5B4800734977 /* LaunchScreen.storyboard */; };
@@ -83,6 +84,7 @@
 		1A9B28DB2210F0FC0014FA3A /* CurrencyNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNameManager.swift; sourceTree = "<group>"; };
 		1A9B28DD2210F1D80014FA3A /* CurrencyNameManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNameManagerImpl.swift; sourceTree = "<group>"; };
 		1A9B28DF2210F2EA0014FA3A /* DefaultContainer+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DefaultContainer+Manager.swift"; sourceTree = "<group>"; };
+		1A9B28E3221103760014FA3A /* RateFormatted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateFormatted.swift; sourceTree = "<group>"; };
 		1AEC0BC4220A5B4400734977 /* Currencies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Currencies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AEC0BC7220A5B4400734977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1AEC0BCE220A5B4800734977 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				1AEC0C20220A7B3C00734977 /* RateResult.swift */,
+				1A9B28E3221103760014FA3A /* RateFormatted.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Currencies/Pods-Currencies-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FlagKit/FlagKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -649,6 +653,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlagKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -740,6 +745,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A9B28E4221103760014FA3A /* RateFormatted.swift in Sources */,
 				1A9B28B1220F560C0014FA3A /* ExchangeRatesServiceImpl.swift in Sources */,
 				1A9B28E02210F2EA0014FA3A /* DefaultContainer+Manager.swift in Sources */,
 				1AEC0C14220A697A00734977 /* ExchangeRatesViewScreen.swift in Sources */,

@@ -13,4 +13,11 @@ class CurrencyNameManagerImpl: CurrencyNameManager {
         let name = Locale.current.localizedString(forCurrencyCode: currencyCode)
         return name ?? ""
     }
+
+    func getCountryNameFor(currencyCode: String) -> String {
+
+        let countrySubString = currencyCode.dropLast()
+
+        return String(countrySubString)
+    }
 }

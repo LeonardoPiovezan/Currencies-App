@@ -16,6 +16,10 @@ final class ExchangeRateCell: UITableViewCell {
             .build()
     }()
 
+    private var labelswrapperView: UIView = {
+        return UIView()
+    }()
+
     lazy var currencyCodeLabel: UILabel = {
         return UILabel.Builder()
             .withDescriptor(TitleLabelDescriptor())
@@ -32,6 +36,10 @@ final class ExchangeRateCell: UITableViewCell {
     lazy var amountTextField: UITextField = {
         return UITextField(frame: CGRect.zero)
     }()
+
+    private var rate: Rate!
+
+    private var rateFormatted: RateFormatted!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,27 +61,49 @@ final class ExchangeRateCell: UITableViewCell {
 
     }
 
+    func bindTo(rateFormatted: RateFormatted) {
+        self.rateFormatted = rateFormatted
+        self.updateCellContent()
+    }
+
+    func updateCellContent() {
+        self.currencyCodeLabel.text = self.rateFormatted.currencyCode
+        self.currencyNameLabel.text = self.rateFormatted.currencyName
+        self.countryImageView.image = self.rateFormatted.countryImage
+    }
+
 }
 
 extension ExchangeRateCell: CodeView {
     func buildViewHierarchy() {
         self.addSubview(self.countryImageView)
-        self.addSubview(self.currencyCodeLabel)
-        self.addSubview(self.currencyNameLabel)
+        self.addSubview(self.labelswrapperView)
+        self.labelswrapperView.addSubview(self.currencyCodeLabel)
+        self.labelswrapperView.addSubview(self.currencyNameLabel)
         self.addSubview(self.amountTextField)
     }
 
     func setupConstraints() {
-        self.countryImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.2)
+        self.countryImageView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            make.leading.equalToSuperview().offset(8)
+            make.top.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().inset(8)
+            make.width.equalToSuperview().multipliedBy(0.10)
+            make.height.equalTo(self.countryImageView.snp.width)
+        }
+
+        self.labelswrapperView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            make.leading.equalTo(self.countryImageView.snp.trailing).offset(8)
+            make.centerY.equalTo(self.countryImageView.snp.centerY)
+            make.trailing.equalTo(self.amountTextField.snp.trailing)
         }
 
         self.currencyCodeLabel.snp.makeConstraints { make in
-            make.leading.equalTo(self.countryImageView.snp.trailing)
+            make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(8)
+            make.trailing.equalToSuperview()
         }
 
         self.currencyNameLabel.snp.makeConstraints { [weak self] make in
@@ -81,19 +111,24 @@ extension ExchangeRateCell: CodeView {
             make.leading.equalTo(self.currencyCodeLabel.snp.leading)
             make.top.equalTo(self.currencyCodeLabel.snp.bottom)
             make.bottom.equalToSuperview().inset(8)
-            make.trailing.equalTo(self.amountTextField)
+            make.trailing.equalTo(self.currencyCodeLabel.snp.trailing)
         }
 
         self.amountTextField.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(8)
             make.centerY.equalTo(self.countryImageView.snp.centerY)
-            make.width.equalToSuperview().multipliedBy(0.15)
+            make.width.equalToSuperview().multipliedBy(0.30)
         }
     }
 
     func setupAdditionalConfiguration() {
-        self.currencyNameLabel.text = "name"
-        self.currencyCodeLabel.text = "Code"
         self.selectionStyle = .none
+
+        amountTextField.borderStyle = .roundedRect
+        amountTextField.layer.masksToBounds = false
+        amountTextField.layer.shadowRadius = 1.0
+        amountTextField.layer.shadowColor = UIColor.black.cgColor
+        amountTextField.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        amountTextField.layer.shadowOpacity = 1.0
     }
 }

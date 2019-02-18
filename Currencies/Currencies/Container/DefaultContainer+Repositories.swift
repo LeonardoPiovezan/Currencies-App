@@ -10,7 +10,7 @@ import Moya
 extension DefaultContainer {
   func registerRepositories() {
     self.container.register(ExchangeRatesRepository.self) { _ in
-        let provider = MoyaProvider<ExchangeRatesRouter>()
+      let provider = MoyaProvider<ExchangeRatesRouter>()
         return ExchangeRatesRepositoryImpl(provider: provider)
     }
   }

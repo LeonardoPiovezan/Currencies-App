@@ -39,11 +39,18 @@ final class ExchangeRateCell: UITableViewCell {
 
     private var rate: Rate!
 
-    private var rateFormatted: RateFormatted!
+  @objc private var rateFormatted: RateFormatted! {
+    didSet {
+      self.amountTextField.text = String(ExchangeRateCell.currentAmount*rateFormatted.rateAmount)
+    }
+  }
+
+  @objc static var currentAmount: Double = 0.0
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.setupView()
+      addObserver(self, forKeyPath: #keyPath(rateFormatted.currencyName), options: [.old, .new], context: nil)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -61,10 +68,16 @@ final class ExchangeRateCell: UITableViewCell {
 
     }
 
-    func bindTo(rateFormatted: RateFormatted) {
+  func bindTo(rateFormatted: RateFormatted) {
         self.rateFormatted = rateFormatted
         self.updateCellContent()
+
+     NotificationCenter.default.addObserver(self, selector: #selector(didChangeAmount(notification:)), name: NSNotification.Name.CurrentAmount, object: nil)
     }
+
+  func stopListening() {
+    NotificationCenter.default.removeObserver(self, name: NSNotification.Name.CurrentAmount, object: nil)
+  }
 
     func updateCellContent() {
         self.currencyCodeLabel.text = self.rateFormatted.currencyCode
@@ -131,4 +144,24 @@ extension ExchangeRateCell: CodeView {
         amountTextField.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
         amountTextField.layer.shadowOpacity = 1.0
     }
+}
+
+extension ExchangeRateCell {
+
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+
+    let amount = object as! Double
+    self.amountTextField.text = String(amount*rateFormatted.rateAmount)
+  }
+
+  @objc func didChangeAmount(notification: Notification) {
+    let currentAmount = notification.userInfo!["currentAmount"] as! Double
+    self.amountTextField.text = "\(currentAmount*rateFormatted.rateAmount)"
+    ExchangeRateCell.currentAmount = currentAmount
+
+  }
+}
+
+extension Notification.Name {
+  static let CurrentAmount = Notification.Name(rawValue: "currentAmount")
 }

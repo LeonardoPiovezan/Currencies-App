@@ -19,5 +19,6 @@ class CurrencyNameManagerImpl: CurrencyNameManager {
         let countrySubString = currencyCode.dropLast()
 
         return String(countrySubString)
+
     }
 }

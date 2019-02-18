@@ -33,7 +33,7 @@ extension ExchangeRatesRouter: TargetType {
         switch self {
         case .getRatesFor(let countryCode):
             return Task.requestParameters(parameters: ["base": countryCode],
-                                          encoding: JSONEncoding.default)
+                                          encoding: URLEncoding.queryString)
         }
 
     }

@@ -18,7 +18,13 @@ struct RateResult: Codable, Equatable {
     }
 }
 
-struct Rate: Equatable {
+class Rate: NSObject {
+
+  init(currencyCode: String, rate: Double) {
+    self.currencyCode = currencyCode
+    self.rate = rate
+  }
+
     let currencyCode: String
     let rate: Double
 }

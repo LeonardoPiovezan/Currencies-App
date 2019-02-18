@@ -9,18 +9,21 @@
 import UIKit
 import FlagKit
 
-class RateFormatted {
+class RateFormatted: NSObject {
     var currencyCode: String!
-    var currencyName: String!
+    @objc var currencyName: String!
     var countryImage: UIImage?
 
-    private let rate: Rate
+  var rateAmount: Double!
+
+    private var rate: Rate
     private let currencyNameManager: CurrencyNameManager
 
     init(rate: Rate,
          currencyNameManager: CurrencyNameManager) {
         self.rate = rate
         self.currencyNameManager = currencyNameManager
+      super.init()
         self.formatFields()
     }
 
@@ -32,5 +35,7 @@ class RateFormatted {
         let countryCode = self.currencyNameManager.getCountryNameFor(currencyCode: currencyCode)
         let flag = Flag(countryCode: countryCode)
         self.countryImage = flag?.originalImage
+
+      self.rateAmount = self.rate.rate
     }
 }

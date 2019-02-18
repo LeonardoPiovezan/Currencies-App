@@ -22,6 +22,7 @@ final class ExchangeRatesServiceImpl: ExchangeRatesService {
             case .success(let response):
                 do {
                     let rateResult = try response.map(RateResult.self)
+                  print(rateResult)
                     completion(Result.success(rateResult))
                 } catch let error {
                     let networkError = NetworkError(message: error.localizedDescription)

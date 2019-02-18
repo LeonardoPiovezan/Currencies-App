@@ -20,7 +20,5 @@ final class ExchangeRatesRepositoryImpl: ExchangeRatesRepository {
         self.provider.request(.getRatesFor(countryCode: countryCode)) { result in
             completion(result)
         }
-    }
-
-    
+    }    
 }

@@ -18,6 +18,8 @@ final class ExchangeRatesViewModel {
 
     private (set) var rates: [Rate] = []
 
+  private (set) var baseRate: Rate!
+
     init(exchangeRateService: ExchangeRatesService) {
         self.exchangeRateService = exchangeRateService
     }
@@ -28,6 +30,7 @@ final class ExchangeRatesViewModel {
             case .success(let rateResult):
                 self?.rateResult = rateResult
                 self?.rates = rateResult.getRateList().sorted(by: { $1.currencyCode > $0.currencyCode })
+                self?.baseRate = Rate(currencyCode: rateResult.base, rate: 1.0)
                 self?.didReceiveRates?()
             case .failure(let error):
                 print(error)

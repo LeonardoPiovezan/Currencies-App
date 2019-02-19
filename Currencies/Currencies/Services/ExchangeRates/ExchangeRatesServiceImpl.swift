@@ -16,8 +16,8 @@ final class ExchangeRatesServiceImpl: ExchangeRatesService {
         self.exchangeRatesRepository = exchangeRatesRepository
     }
 
-    func getRatesFor(countryCode: String, completion: @escaping (Result<RateResult, NetworkError>) -> Void) -> Cancellable {
-        return self.exchangeRatesRepository.getRatesFor(countryCode: countryCode) { result in
+    func getRatesFor(countryCode: String, completion: @escaping (Result<RateResult, NetworkError>) -> Void) {
+        self.exchangeRatesRepository.getRatesFor(countryCode: countryCode) { result in
             switch result {
             case .success(let response):
                 do {

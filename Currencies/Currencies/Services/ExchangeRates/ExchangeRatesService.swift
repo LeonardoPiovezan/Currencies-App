@@ -10,5 +10,5 @@ import Foundation
 import Result
 import Moya
 protocol ExchangeRatesService {
-    func getRatesFor(countryCode: String, completion: @escaping (Result<RateResult, NetworkError>) -> Void) -> Cancellable
+    func getRatesFor(countryCode: String, completion: @escaping (Result<RateResult, NetworkError>) -> Void)
 }

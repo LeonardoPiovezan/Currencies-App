@@ -18,7 +18,7 @@ struct RateResult: Codable, Equatable {
     }
 }
 
-class Rate: NSObject {
+struct Rate {
 
   init(currencyCode: String, rate: Double) {
     self.currencyCode = currencyCode

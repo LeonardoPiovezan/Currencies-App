@@ -16,7 +16,7 @@ class RateFormatted {
 
     var rateAmount: Double!
 
-    var finalAmount: Double! = 0.0
+    var finalAmount: String! = ""
 
     private var rate: Rate
     private let currencyNameManager: CurrencyNameManager
@@ -29,19 +29,32 @@ class RateFormatted {
     }
 
     private func formatFields() {
-        let currencyCode = self.rate.currencyCode
-        self.currencyCode = currencyCode
-        self.currencyName = self.currencyNameManager.getNameFor(currencyCode: rate.currencyCode)
+        self.setCurrencyCode()
+        self.setCurrencyName()
+        self.setCountryImage()
+        self.setRateAmount()
+    }
 
+    private func setCurrencyCode() {
+        self.currencyCode = self.rate.currencyCode
+    }
+
+    private func setCurrencyName() {
+        self.currencyName = self.currencyNameManager.getNameFor(currencyCode: rate.currencyCode)
+    }
+
+    private func setCountryImage() {
         let countryCode = self.currencyNameManager.getCountryNameFor(currencyCode: currencyCode)
         let flag = Flag(countryCode: countryCode)
         self.countryImage = flag?.originalImage
+    }
 
+    private func setRateAmount() {
         self.rateAmount = self.rate.rate
     }
 
     func updateWith(currentAmount: Double) -> RateFormatted {
-        self.finalAmount = self.rateAmount*currentAmount
+        self.finalAmount = String(format: "%.2f", self.rateAmount*currentAmount) 
         return self
     }
 }

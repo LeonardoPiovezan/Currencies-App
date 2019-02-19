@@ -46,6 +46,13 @@ final class ExchangeRateCellView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func configureViewWith(rateFormatted: RateFormatted) {
+        self.currencyCodeLabel.text = rateFormatted.currencyCode
+        self.currencyNameLabel.text = rateFormatted.currencyName
+        self.countryImageView.image = rateFormatted.countryImage
+        self.amountTextField.text = rateFormatted.finalAmount
+    }
 }
 
 extension ExchangeRateCellView: CodeView {

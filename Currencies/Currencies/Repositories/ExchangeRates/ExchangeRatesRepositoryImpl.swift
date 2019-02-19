@@ -16,8 +16,8 @@ final class ExchangeRatesRepositoryImpl: ExchangeRatesRepository {
         self.provider = provider
     }
 
-    func getRatesFor(countryCode: String, completion: @escaping NetworkResult) -> Cancellable {
-        return self.provider.request(.getRatesFor(countryCode: countryCode)) { result in
+    func getRatesFor(countryCode: String, completion: @escaping NetworkResult) {
+        self.provider.request(.getRatesFor(countryCode: countryCode)) { result in
             completion(result)
         }
     }    

@@ -27,9 +27,8 @@ final class ExchangeRatesViewModel {
         self.exchangeRateService = exchangeRateService
     }
 
-    @discardableResult
-    func updateRatesFor(countryCode: String) -> Cancellable {
-        return self.exchangeRateService.getRatesFor(countryCode: countryCode) { [weak self] result in
+    func updateRatesFor(countryCode: String) {
+        self.exchangeRateService.getRatesFor(countryCode: countryCode) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let rateResult):

@@ -14,30 +14,6 @@ final class ExchangeRateCell: UITableViewCell {
     }()
 
     private var rateFormatted: RateFormatted!
-
-    var amount: String = "" {
-        didSet{
-            self.view.amountTextField.text = amount
-        }
-    }
-
-    var currencyCode: String = "" {
-        didSet {
-            self.view.currencyCodeLabel.text = currencyCode
-        }
-    }
-
-    var currencyName: String = ""{
-        didSet {
-            self.view.currencyNameLabel.text = currencyName
-        }
-    }
-
-    var countryImage: UIImage? {
-        didSet {
-            self.view.countryImageView.image = countryImage
-        }
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,14 +35,7 @@ final class ExchangeRateCell: UITableViewCell {
     }
 
     func updateCellContent() {
-        self.currencyCode = self.rateFormatted.currencyCode
-        self.currencyName = self.rateFormatted.currencyName
-        self.countryImage = self.rateFormatted.countryImage
-        self.amount = String(self.rateFormatted.finalAmount)
-    }
-
-    func updateValue(value: Double) {
-        self.amount = "\(value*rateFormatted.rateAmount)"
+        self.view.configureViewWith(rateFormatted: self.rateFormatted)
     }
 }
 

@@ -340,7 +340,6 @@
 		1AEC0BC6220A5B4400734977 /* Currencies */ = {
 			isa = PBXGroup;
 			children = (
-				1A4B9BE1221B94A50069E4CF /* Utils */,
 				1AEC0BC7220A5B4400734977 /* AppDelegate.swift */,
 				1AEC0BCE220A5B4800734977 /* Assets.xcassets */,
 				1AEC0BF8220A5E2900734977 /* CodeView */,
@@ -355,6 +354,7 @@
 				1AEC0BF6220A5E0F00734977 /* Networking */,
 				1A9B28D82210F09F0014FA3A /* Repositories */,
 				1AEC0BF7220A5E2200734977 /* Services */,
+				1A4B9BE1221B94A50069E4CF /* Utils */,
 			);
 			path = Currencies;
 			sourceTree = "<group>";

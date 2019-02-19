@@ -17,10 +17,12 @@ final class ExchangeRatesView: UIViewController {
 
     private var viewModel: ExchangeRatesViewModel!
 
-  private var ratesFormatted: [RateFormatted]!
+    private var ratesFormatted: [RateFormatted]!
 
-  @objc dynamic private var firstRate: Rate?
-  @objc dynamic var currentValue: Double = 0.0
+    private var currentAmount: Double = 0
+    private var firstRate: Rate?
+    private var currentValue: Double = 0.0
+    private var timer: Timer?
 
     init(exchangeRatesService: ExchangeRatesService,
          currencyNameManager: CurrencyNameManager) {
@@ -28,7 +30,6 @@ final class ExchangeRatesView: UIViewController {
         self.currencyNameManager = currencyNameManager
         super.init(nibName: nil, bundle: nil)
     }
-
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,125 +43,119 @@ final class ExchangeRatesView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViewModel()
+        self.requestRatesFor(currencyCode: "EUR")
         self.screen.tableView.delegate = self
         self.screen.tableView.dataSource = self
-//      self.setUpTimer()
     }
 
     func setupViewModel() {
         self.viewModel = ExchangeRatesViewModel(exchangeRateService: self.exchangeRatesService)
-        self.viewModel.didReceiveRates = { [weak self] in
-          self?.firstRate = self?.viewModel.baseRate
+        self.viewModel.didReceiveRates = { [weak self] shouldKeepData in
 
-          self?.ratesFormatted = self?.viewModel.rates.map { RateFormatted(rate: $0, currencyNameManager: self!.currencyNameManager)}
-          self?.updateTableView()
+            self?.firstRate = self?.viewModel.baseRate
+
+            self?.ratesFormatted = self?.viewModel.rates.map { RateFormatted(rate: $0, currencyNameManager: self!.currencyNameManager).updateWith(currentAmount: self!.currentAmount)}
+            if shouldKeepData {
+                self?.updateTableView()
+            } else {
+                self?.currentAmount = 0.0
+                self?.screen.tableView.reloadData()
+                self?.screen.tableView.scrollToTop()
+            }
         }
 
         self.viewModel.failedToReceiveRates = { error in
             print(error)
         }
-
-        self.viewModel.updateRatesFor(countryCode: "EUR")
     }
 
     func updateTableView() {
-        self.screen.tableView.reloadData()
+        self.screen.tableView.indexPathsForVisibleRows?
+            .filter { $0.row != 0 }
+            .forEach { [weak self] index in
+                let cell = self?.screen.tableView.cellForRow(at: index) as! ExchangeRateCell
+                cell.bindTo(rateFormatted: self!.ratesFormatted[index.row])
+        }
     }
 
-  func setUpTimer() {
-    let oi = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ [weak self] timer in
-
-      self?.viewModel.updateRatesFor(countryCode: self?.firstRate?.currencyCode ?? "EUR")
+    func requestRatesFor(currencyCode: String) {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ [weak self] timer in
+            self?.viewModel.updateRatesFor(countryCode: currencyCode)
+        }
+        self.timer?.fire()
     }
-    oi.fire()
-  }
+
+    func setUpTimer() {
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ [weak self] timer in
+            let countryCode = self?.firstRate?.currencyCode ?? "EUR"
+            self?.viewModel.updateRatesFor(countryCode: countryCode)
+        }
+    }
 }
+
 extension ExchangeRatesView: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let cell = tableView.cellForRow(at: indexPath) as! ExchangeRateCell
+            cell.view.amountTextField.becomeFirstResponder()
+            return
+        }
 
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.timer?.invalidate()
+        UIView.animate(withDuration: 2, animations: {
+            self.screen.tableView.beginUpdates()
+            self.screen.tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0))
+            self.screen.tableView.endUpdates()
 
-    if indexPath.row == 0 {
-      return
+        }) { (finished) in
+            let rate = self.ratesFormatted[indexPath.row]
+            self.requestRatesFor(currencyCode: rate.currencyCode)
+        }
     }
 
-    UIView.animate(withDuration: 0.5, animations: {
-      self.screen.tableView.dataSource?.tableView?(self.screen.tableView, moveRowAt: indexPath, to: IndexPath(row: 0, section: 0))
-
-    }) { (finished) in
-      let rate = self.viewModel.rates[indexPath.row - 1]
-
-      self.viewModel.updateRatesFor(countryCode: rate.currencyCode)
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
-  }
-
-  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    UIView.animate(withDuration: 0.5, animations: {
-      self.screen.tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-    }) { finished in
-      self.firstRate = self.viewModel.rates[sourceIndexPath.row - 1]
-      self.updateTableView()
-    }
-  }
-  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
 }
 
 extension ExchangeRatesView: UITableViewDataSource {
-
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
-  }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      if self.viewModel.rates.count > 0 {
-        if section == 0 {
-          return 1
+        if self.viewModel.rates.count > 0 {
+            return self.ratesFormatted.count
         }
-//        return (self.viewModel.rates.count)
-        return self.ratesFormatted.count
-      }
-      return 0
+        return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-       let cell = tableView.dequeueReusableCell(withIdentifier: "rateCell") as! ExchangeRateCell
-      if indexPath.section == 0 {
-          cell.bindTo(rateFormatted: RateFormatted(rate: self.firstRate!,
-                                                   currencyNameManager: self.currencyNameManager))
+        let cell = tableView.dequeueReusableCell(withIdentifier: "rateCell") as! ExchangeRateCell
+        if indexPath.row == 0 {
+            cell.bindTo(rateFormatted: RateFormatted(rate: self.firstRate!,
+                                                     currencyNameManager: self.currencyNameManager))
 
-          cell.amountTextField.delegate = self
-          cell.stopListening()
-          return cell
-      }
+            cell.view.amountTextField.delegate = self
+            return cell
+        }
 
-//        let rate = self.viewModel.rates[indexPath.row]
-
-      let rate = self.ratesFormatted[indexPath.row]
-//        cell.bindTo(rateFormatted: RateFormatted(rate: rate,
-//                                                 currencyNameManager: self.currencyNameManager))
-      cell.bindTo(rateFormatted: rate)
+        let rate = self.ratesFormatted[indexPath.row]
+        cell.bindTo(rateFormatted: rate)
         return cell
     }
-
 }
 
 extension ExchangeRatesView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
-      let number = String(textField.text! + string)
-      NotificationCenter.default.post(name: Notification.Name.CurrentAmount, object: self, userInfo: ["currentAmount": Double(number) ?? 0.0])
-      ExchangeRateCell.currentAmount = Double(number) ?? 0.0
-      return true
-    }
-}
+        let number = String(textField.text! + string)
 
-extension UITableView {
-  func scrollToTop() {
-    if self.numberOfRows(inSection: 0) > 0 {
-      let indexPath = IndexPath(row: 0, section: 0)
-      self.scrollToRow(at: indexPath, at: .top, animated: true)
+        self.currentAmount = Double(number) ?? 0.0
+        self.ratesFormatted = self.ratesFormatted.compactMap { $0.updateWith(currentAmount: self.currentAmount ) }
+
+        self.updateTableView()
+        return true
     }
-  }
 }

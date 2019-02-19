@@ -13,5 +13,5 @@ import Result
 protocol ExchangeRatesRepository {
     typealias NetworkResult = (Result<Response, MoyaError>) -> Void
 
-    func getRatesFor(countryCode: String, completion: @escaping NetworkResult)
+    func getRatesFor(countryCode: String, completion: @escaping NetworkResult) -> Cancellable
 }

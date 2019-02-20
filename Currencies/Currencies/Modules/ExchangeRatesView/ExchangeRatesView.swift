@@ -130,13 +130,14 @@ extension ExchangeRatesView: UITableViewDataSource {
                                                      currencyNameManager: self.currencyNameManager,
                                                      countryFlagsManager: self.countryFlagsManager))
             cell.view.amountTextField.text = String(format: "%.2f", self.currentAmount)
-
+cell.view.amountTextField.isUserInteractionEnabled = true
             cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell
         }
 
         let rate = self.ratesFormatted[indexPath.row]
         cell.bindTo(rateFormatted: rate)
+        cell.view.amountTextField.isUserInteractionEnabled = false
         return cell
     }
 

@@ -15,10 +15,7 @@ class CurrencyNameManagerImpl: CurrencyNameManager {
     }
 
     func getCountryNameFor(currencyCode: String) -> String {
-
         let countrySubString = currencyCode.dropLast()
-
         return String(countrySubString)
-
     }
 }

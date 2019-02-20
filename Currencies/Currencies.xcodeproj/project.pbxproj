@@ -13,6 +13,8 @@
 		1A695B39221CE75D0084C712 /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A695B38221CE75D0084C712 /* String+Utils.swift */; };
 		1A695B3C221CE81A0084C712 /* StringSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A695B3B221CE81A0084C712 /* StringSpec.swift */; };
 		1A695B3F221CEC460084C712 /* RateFormattedSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A695B3E221CEC460084C712 /* RateFormattedSpec.swift */; };
+		1A695B42221CF2B50084C712 /* CountryFlagsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A695B41221CF2B50084C712 /* CountryFlagsManager.swift */; };
+		1A695B44221CF2F10084C712 /* CountryFlagsManagerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A695B43221CF2F10084C712 /* CountryFlagsManagerImpl.swift */; };
 		1A9B28AF220F55F70014FA3A /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28AE220F55F70014FA3A /* ExchangeRatesService.swift */; };
 		1A9B28B1220F560C0014FA3A /* ExchangeRatesServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28B0220F560C0014FA3A /* ExchangeRatesServiceImpl.swift */; };
 		1A9B28B4220F58190014FA3A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28B3220F58190014FA3A /* NetworkError.swift */; };
@@ -80,6 +82,8 @@
 		1A695B38221CE75D0084C712 /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		1A695B3B221CE81A0084C712 /* StringSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSpec.swift; sourceTree = "<group>"; };
 		1A695B3E221CEC460084C712 /* RateFormattedSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateFormattedSpec.swift; sourceTree = "<group>"; };
+		1A695B41221CF2B50084C712 /* CountryFlagsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFlagsManager.swift; sourceTree = "<group>"; };
+		1A695B43221CF2F10084C712 /* CountryFlagsManagerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryFlagsManagerImpl.swift; sourceTree = "<group>"; };
 		1A9B28AE220F55F70014FA3A /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		1A9B28B0220F560C0014FA3A /* ExchangeRatesServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceImpl.swift; sourceTree = "<group>"; };
 		1A9B28B3220F58190014FA3A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -202,6 +206,15 @@
 			path = Formatter;
 			sourceTree = "<group>";
 		};
+		1A695B40221CF1BC0084C712 /* CountryFlagsManager */ = {
+			isa = PBXGroup;
+			children = (
+				1A695B41221CF2B50084C712 /* CountryFlagsManager.swift */,
+				1A695B43221CF2F10084C712 /* CountryFlagsManagerImpl.swift */,
+			);
+			path = CountryFlagsManager;
+			sourceTree = "<group>";
+		};
 		1A9B28B2220F57EC0014FA3A /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +327,7 @@
 		1A9B28D82210F09F0014FA3A /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				1A695B40221CF1BC0084C712 /* CountryFlagsManager */,
 				1A9B28DA2210F0C40014FA3A /* CountryNames */,
 				1A9B28D92210F0B20014FA3A /* ExchangeRates */,
 			);
@@ -815,6 +829,7 @@
 				1A9B28CC2210BD910014FA3A /* ImageViewBuilder.swift in Sources */,
 				1AEC0C05220A632000734977 /* DefaultContainer.swift in Sources */,
 				1AEC0C18220A70EB00734977 /* ExchangeRatesRepository.swift in Sources */,
+				1A695B42221CF2B50084C712 /* CountryFlagsManager.swift in Sources */,
 				1AEC0C1F220A749500734977 /* ExchangeRatesRepositoryImpl.swift in Sources */,
 				1A4B9BE0221B8F980069E4CF /* ShadowedTextField.swift in Sources */,
 				1AEC0C01220A602300734977 /* Coordinator.swift in Sources */,
@@ -824,6 +839,7 @@
 				1AEC0C09220A636F00734977 /* DefaultContainer+Repositories.swift in Sources */,
 				1A9B28DE2210F1D80014FA3A /* CurrencyNameManagerImpl.swift in Sources */,
 				1AEC0C21220A7B3C00734977 /* RateResult.swift in Sources */,
+				1A695B44221CF2F10084C712 /* CountryFlagsManagerImpl.swift in Sources */,
 				1A9B28BF220FC4BB0014FA3A /* Label+Descriptor.swift in Sources */,
 				1AEC0BC8220A5B4400734977 /* AppDelegate.swift in Sources */,
 				1AEC0C10220A694A00734977 /* ExchangeRatesView.swift in Sources */,

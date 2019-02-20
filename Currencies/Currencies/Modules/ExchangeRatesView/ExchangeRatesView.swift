@@ -12,6 +12,7 @@ import Moya
 final class ExchangeRatesView: UIViewController {
     private let exchangeRatesService: ExchangeRatesService
     private let currencyNameManager: CurrencyNameManager
+    private let countryFlagsManager: CountryFlagsManager
 
     private var screen: ExchangeRatesViewScreen!
 
@@ -21,13 +22,14 @@ final class ExchangeRatesView: UIViewController {
 
     private var currentAmount: Double = 0
     private var firstRate: Rate?
-    private var currentValue: Double = 0.0
     private var timer: Timer?
 
     init(exchangeRatesService: ExchangeRatesService,
-         currencyNameManager: CurrencyNameManager) {
+         currencyNameManager: CurrencyNameManager,
+         countryFlagsManager: CountryFlagsManager) {
         self.exchangeRatesService = exchangeRatesService
         self.currencyNameManager = currencyNameManager
+        self.countryFlagsManager = countryFlagsManager
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -53,15 +55,21 @@ final class ExchangeRatesView: UIViewController {
                                                 currencyNameManager: self.currencyNameManager)
         self.viewModel.didReceiveRates = { [weak self] shouldKeepData in
 
-            self?.firstRate = self?.viewModel.baseRate
+            guard let self = self else { return }
+            self.firstRate = self.viewModel.baseRate
 
-            self?.ratesFormatted = self?.viewModel.rates.map { RateFormatted(rate: $0, currencyNameManager: self!.currencyNameManager).updateWith(currentAmount: self!.currentAmount)}
+            self.ratesFormatted = self.viewModel
+                .rates
+                .map { RateFormatted(rate: $0,
+                                     currencyNameManager: self.currencyNameManager,
+                                     countryFlagsManager: self.countryFlagsManager)
+                    .updateWith(currentAmount: self.currentAmount)}
             if shouldKeepData {
-                self?.updateTableView()
+                self.updateTableView()
             } else {
-                self?.currentAmount = 0.0
-                self?.screen.tableView.reloadData()
-                self?.screen.tableView.scrollToTop()
+                self.currentAmount = 0.0
+                self.screen.tableView.reloadData()
+                self.screen.tableView.scrollToTop()
             }
         }
 
@@ -128,7 +136,8 @@ extension ExchangeRatesView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rateCell") as! ExchangeRateCell
         if indexPath.row == 0 {
             cell.bindTo(rateFormatted: RateFormatted(rate: self.firstRate!,
-                                                     currencyNameManager: self.currencyNameManager))
+                                                     currencyNameManager: self.currencyNameManager,
+                                                     countryFlagsManager: self.countryFlagsManager))
             cell.view.amountTextField.text = String(self.currentAmount)
             cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell

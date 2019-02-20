@@ -13,5 +13,9 @@ extension DefaultContainer {
         self.container.register(CurrencyNameManager.self) { _ in
             return CurrencyNameManagerImpl()
         }
+
+        self.container.register(CountryFlagsManager.self) { _ in
+            return CountryFlagsManagerImpl()
+        }
     }
 }

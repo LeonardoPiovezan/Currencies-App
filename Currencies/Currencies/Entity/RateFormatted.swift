@@ -20,11 +20,14 @@ class RateFormatted {
 
     private var rate: Rate
     private let currencyNameManager: CurrencyNameManager
+    private let countryFlagsManager: CountryFlagsManager
 
     init(rate: Rate,
-         currencyNameManager: CurrencyNameManager) {
+         currencyNameManager: CurrencyNameManager,
+         countryFlagsManager: CountryFlagsManager) {
         self.rate = rate
         self.currencyNameManager = currencyNameManager
+        self.countryFlagsManager = countryFlagsManager
         self.formatFields()
     }
 
@@ -45,8 +48,7 @@ class RateFormatted {
 
     private func setCountryImage() {
         let countryCode = self.currencyNameManager.getCountryNameFor(currencyCode: currencyCode)
-        let flag = Flag(countryCode: countryCode)
-        self.countryImage = flag?.originalImage
+        self.countryImage = self.countryFlagsManager.getImageFor(countryCode: countryCode)
     }
 
     private func setRateAmount() {

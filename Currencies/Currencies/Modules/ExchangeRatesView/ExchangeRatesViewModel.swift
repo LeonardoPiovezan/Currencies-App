@@ -42,6 +42,11 @@ final class ExchangeRatesViewModel {
         }
     }
 
+    func updateCurrentAmountFor(ratesFormatted: [RateFormatted],
+                                currentAmount: Double) -> [RateFormatted] {
+        return ratesFormatted.compactMap { $0.updateWith(currentAmount: currentAmount ) }
+    }
+
     private func updateViewModelParameters() {
         self.updateRates()
         self.updateBaseRate()

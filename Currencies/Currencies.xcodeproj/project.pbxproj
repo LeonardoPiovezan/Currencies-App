@@ -35,7 +35,6 @@
 		1AEC0BC8220A5B4400734977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0BC7220A5B4400734977 /* AppDelegate.swift */; };
 		1AEC0BCF220A5B4800734977 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1AEC0BCE220A5B4800734977 /* Assets.xcassets */; };
 		1AEC0BD2220A5B4800734977 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEC0BD0220A5B4800734977 /* LaunchScreen.storyboard */; };
-		1AEC0BDD220A5B4800734977 /* CurrenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0BDC220A5B4800734977 /* CurrenciesTests.swift */; };
 		1AEC0BE8220A5B4800734977 /* CurrenciesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0BE7220A5B4800734977 /* CurrenciesUITests.swift */; };
 		1AEC0C01220A602300734977 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C00220A602300734977 /* Coordinator.swift */; };
 		1AEC0C03220A604A00734977 /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEC0C02220A604A00734977 /* CodeView.swift */; };
@@ -107,7 +106,6 @@
 		1AEC0BD1220A5B4800734977 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1AEC0BD3220A5B4800734977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AEC0BD8220A5B4800734977 /* CurrenciesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrenciesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1AEC0BDC220A5B4800734977 /* CurrenciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesTests.swift; sourceTree = "<group>"; };
 		1AEC0BDE220A5B4800734977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AEC0BE3220A5B4800734977 /* CurrenciesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CurrenciesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AEC0BE7220A5B4800734977 /* CurrenciesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrenciesUITests.swift; sourceTree = "<group>"; };
@@ -403,7 +401,6 @@
 				1A695B3A221CE8070084C712 /* Utils */,
 				1A9B28D32210DE500014FA3A /* Mocks */,
 				1A9B28CF2210DD730014FA3A /* Modules */,
-				1AEC0BDC220A5B4800734977 /* CurrenciesTests.swift */,
 				1AEC0BDE220A5B4800734977 /* Info.plist */,
 			);
 			path = CurrenciesTests;
@@ -865,7 +862,6 @@
 				1A9B28D72210DE890014FA3A /* MockExchangeRateService.swift in Sources */,
 				1A695B3C221CE81A0084C712 /* StringSpec.swift in Sources */,
 				1A9B28D22210DD950014FA3A /* ExchangeRatesViewModelSpec.swift in Sources */,
-				1AEC0BDD220A5B4800734977 /* CurrenciesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

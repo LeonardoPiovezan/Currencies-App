@@ -68,8 +68,8 @@ final class ExchangeRatesView: UIViewController {
                 self.updateTableView()
             } else {
                 self.currentAmount = 0.0
-                self.screen.tableView.reloadData()
                 self.screen.tableView.scrollToTop()
+                self.screen.tableView.reloadData()
             }
         }
 
@@ -93,13 +93,6 @@ final class ExchangeRatesView: UIViewController {
         }
         self.timer?.fire()
     }
-
-    func setUpTimer() {
-        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ [weak self] timer in
-            let countryCode = self?.firstRate?.currencyCode ?? "EUR"
-            self?.viewModel.updateRatesFor(countryCode: countryCode, currentAmount: self?.currentAmount ?? 0.00)
-        }
-    }
 }
 
 extension ExchangeRatesView: UITableViewDelegate {
@@ -111,15 +104,13 @@ extension ExchangeRatesView: UITableViewDelegate {
         }
 
         self.timer?.invalidate()
-        UIView.animate(withDuration: 2, animations: {
-            self.screen.tableView.beginUpdates()
-            self.screen.tableView.moveRow(at: indexPath, to: IndexPath(row: 0, section: 0))
-            self.screen.tableView.endUpdates()
+        let rate = self.ratesFormatted[indexPath.row]
+        let firstIndex = IndexPath(row: 0, section: 0)
 
-        }) { (finished) in
-            let rate = self.ratesFormatted[indexPath.row]
-            self.requestRatesFor(currencyCode: rate.currencyCode)
-        }
+        self.screen.tableView.moveRow(at: indexPath, to: firstIndex)
+        self.screen.tableView.scrollToTop()
+
+        self.requestRatesFor(currencyCode: rate.currencyCode)
     }
 
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -138,7 +129,8 @@ extension ExchangeRatesView: UITableViewDataSource {
             cell.bindTo(rateFormatted: RateFormatted(rate: self.firstRate!,
                                                      currencyNameManager: self.currencyNameManager,
                                                      countryFlagsManager: self.countryFlagsManager))
-            cell.view.amountTextField.text = String(self.currentAmount)
+            cell.view.amountTextField.text = String(format: "%.2f", self.currentAmount)
+
             cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell
         }
@@ -150,9 +142,11 @@ extension ExchangeRatesView: UITableViewDataSource {
 
   @objc func editingChange(_ textField: UITextField) {
     let numberString = textField.text ?? ""
-
     self.currentAmount = numberString.toDouble()
-    self.ratesFormatted = self.ratesFormatted.compactMap { $0.updateWith(currentAmount: self.currentAmount ) }
+
+    self.ratesFormatted = self.viewModel
+        .updateCurrentAmountFor(ratesFormatted: self.ratesFormatted,
+                                currentAmount: self.currentAmount)
 
     self.updateTableView()
   }

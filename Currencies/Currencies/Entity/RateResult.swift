@@ -18,7 +18,7 @@ struct RateResult: Codable, Equatable {
     }
 }
 
-struct Rate {
+struct Rate: Equatable {
 
   init(currencyCode: String, rate: Double) {
     self.currencyCode = currencyCode

@@ -98,7 +98,7 @@ extension ExchangeRateCellView: CodeView {
         self.amountTextField.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(8)
             make.centerY.equalTo(self.countryImageView.snp.centerY)
-            make.width.equalToSuperview().multipliedBy(0.30)
+            make.width.equalToSuperview().multipliedBy(0.45)
         }
     }
 

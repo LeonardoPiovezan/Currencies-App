@@ -49,7 +49,8 @@ final class ExchangeRatesView: UIViewController {
     }
 
     func setupViewModel() {
-        self.viewModel = ExchangeRatesViewModel(exchangeRateService: self.exchangeRatesService)
+        self.viewModel = ExchangeRatesViewModel(exchangeRateService: self.exchangeRatesService,
+                                                currencyNameManager: self.currencyNameManager)
         self.viewModel.didReceiveRates = { [weak self] shouldKeepData in
 
             self?.firstRate = self?.viewModel.baseRate
@@ -80,7 +81,7 @@ final class ExchangeRatesView: UIViewController {
 
     func requestRatesFor(currencyCode: String) {
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ [weak self] timer in
-            self?.viewModel.updateRatesFor(countryCode: currencyCode)
+            self?.viewModel.updateRatesFor(countryCode: currencyCode, currentAmount: self?.currentAmount ?? 0.00)
         }
         self.timer?.fire()
     }
@@ -88,7 +89,7 @@ final class ExchangeRatesView: UIViewController {
     func setUpTimer() {
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){ [weak self] timer in
             let countryCode = self?.firstRate?.currencyCode ?? "EUR"
-            self?.viewModel.updateRatesFor(countryCode: countryCode)
+            self?.viewModel.updateRatesFor(countryCode: countryCode, currentAmount: self?.currentAmount ?? 0.00)
         }
     }
 }
@@ -139,9 +140,9 @@ extension ExchangeRatesView: UITableViewDataSource {
     }
 
   @objc func editingChange(_ textField: UITextField) {
-    let number = textField.text ?? ""
+    let numberString = textField.text ?? ""
 
-    self.currentAmount = Double(number) ?? 0.0
+    self.currentAmount = numberString.toDouble()
     self.ratesFormatted = self.ratesFormatted.compactMap { $0.updateWith(currentAmount: self.currentAmount ) }
 
     self.updateTableView()

@@ -17,7 +17,7 @@ final class ExchangeRatesView: UIViewController {
 
     private var viewModel: ExchangeRatesViewModel!
 
-    private var ratesFormatted: [RateFormatted]!
+    private var ratesFormatted: [RateFormatted]! = []
 
     private var currentAmount: Double = 0
     private var firstRate: Rate?
@@ -119,25 +119,17 @@ extension ExchangeRatesView: UITableViewDelegate {
 }
 
 extension ExchangeRatesView: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.viewModel.rates.count > 0 {
-            return self.ratesFormatted.count
-        }
-        return 0
+        return self.ratesFormatted.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "rateCell") as! ExchangeRateCell
         if indexPath.row == 0 {
             cell.bindTo(rateFormatted: RateFormatted(rate: self.firstRate!,
                                                      currencyNameManager: self.currencyNameManager))
-
-            cell.view.amountTextField.delegate = self
+            cell.view.amountTextField.text = String(self.currentAmount)
+            cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell
         }
 
@@ -145,17 +137,13 @@ extension ExchangeRatesView: UITableViewDataSource {
         cell.bindTo(rateFormatted: rate)
         return cell
     }
-}
 
-extension ExchangeRatesView: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+  @objc func editingChange(_ textField: UITextField) {
+    let number = textField.text ?? ""
 
-        let number = String(textField.text! + string)
+    self.currentAmount = Double(number) ?? 0.0
+    self.ratesFormatted = self.ratesFormatted.compactMap { $0.updateWith(currentAmount: self.currentAmount ) }
 
-        self.currentAmount = Double(number) ?? 0.0
-        self.ratesFormatted = self.ratesFormatted.compactMap { $0.updateWith(currentAmount: self.currentAmount ) }
-
-        self.updateTableView()
-        return true
-    }
+    self.updateTableView()
+  }
 }

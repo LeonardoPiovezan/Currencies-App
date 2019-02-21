@@ -16,6 +16,7 @@ class ExchangeRatesViewModelSpec: QuickSpec {
     var subject: ExchangeRatesViewModel!
     var ratesService: ExchangeRatesService!
     var currencyNameManager = CurrencyNameManagerImpl()
+    var countryFlagsManager = CountryFlagsManagerImpl()
     override func spec() {
         describe("Exchange Rates View Behaviour") {
             context("Received Rates From Service") {
@@ -24,7 +25,8 @@ class ExchangeRatesViewModelSpec: QuickSpec {
 
                     self.ratesService = MockExchangeRateService(ratesResult: result)
                     self.subject = ExchangeRatesViewModel(exchangeRateService: self.ratesService,
-                                                          currencyNameManager: self.currencyNameManager)
+                                                          currencyNameManager: self.currencyNameManager,
+                                                          countryFlagsManager: self.countryFlagsManager)
                 }
 
                 it("Check If Sucess Rates Are Sorted") {
@@ -44,16 +46,14 @@ class ExchangeRatesViewModelSpec: QuickSpec {
 
                 it("Check Updates When Amount Changes") {
                     self.subject.updateRatesFor(countryCode: "EUR", currentAmount: 1.0)
-                    let rates = self.subject.rates.map { RateFormatted(rate: $0,
-                                                                       currencyNameManager: self.currencyNameManager,
-                                                                       countryFlagsManager: CountryFlagsManagerImpl())}
-                    var newRatesFormatted = self.subject.updateCurrentAmountFor(ratesFormatted: rates, currentAmount: 10)
+                    var newRatesFormatted = self.subject.getUpdatedRatesFormattedFor(currentAmount: 10)
 
                     var amounts = newRatesFormatted.map { $0.finalAmount }
 
                     expect(amounts) == ["40.00", "10.00", "15.00"]
 
-                    newRatesFormatted = self.subject.updateCurrentAmountFor(ratesFormatted: rates, currentAmount: 100)
+                    newRatesFormatted = self.subject.getUpdatedRatesFormattedFor(currentAmount: 100)
+
                     amounts = newRatesFormatted.map { $0.finalAmount }
                     expect(amounts) == ["400.00", "100.00", "150.00"]
 
@@ -65,7 +65,7 @@ class ExchangeRatesViewModelSpec: QuickSpec {
                     beforeEach {
                         self.ratesService = MockExchangeRateService()
                         self.subject = ExchangeRatesViewModel(exchangeRateService: self.ratesService,
-                                                              currencyNameManager: self.currencyNameManager)
+                                                              currencyNameManager: self.currencyNameManager, countryFlagsManager: self.countryFlagsManager)
                     }
 
                     it("Check If Keep Old Data Is True") {
@@ -94,7 +94,7 @@ class ExchangeRatesViewModelSpec: QuickSpec {
                     let result = Result<RateResult, NetworkError>.failure(NetworkError(message: "Failed to Download"))
                     self.ratesService = MockExchangeRateService(ratesResult: result)
                     self.subject = ExchangeRatesViewModel(exchangeRateService: self.ratesService,
-                                                          currencyNameManager: CurrencyNameManagerImpl())
+                                                          currencyNameManager: CurrencyNameManagerImpl(), countryFlagsManager: self.countryFlagsManager)
                 }
 
                 it("Check if error message is not nil") {

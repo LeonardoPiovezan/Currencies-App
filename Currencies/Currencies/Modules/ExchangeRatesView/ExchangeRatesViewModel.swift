@@ -13,10 +13,13 @@ final class ExchangeRatesViewModel {
 
     private let exchangeRateService: ExchangeRatesService
     private let currencyNameManager: CurrencyNameManager
+    private let countryFlagsManager: CountryFlagsManager
+
     var didReceiveRates: ((Bool) -> Void)?
     var failedToReceiveRates: ((Error) -> Void)?
 
     private (set) var rates: [Rate] = []
+    private (set) var ratesFormatted: [RateFormatted] = []
     private (set) var baseRate: Rate!
 
     private var previousCode = ""
@@ -24,9 +27,11 @@ final class ExchangeRatesViewModel {
     private var rateResult: RateResult!
 
     init(exchangeRateService: ExchangeRatesService,
-         currencyNameManager: CurrencyNameManager) {
+         currencyNameManager: CurrencyNameManager,
+         countryFlagsManager: CountryFlagsManager) {
         self.exchangeRateService = exchangeRateService
         self.currencyNameManager = currencyNameManager
+        self.countryFlagsManager = countryFlagsManager
     }
 
     func updateRatesFor(countryCode: String, currentAmount: Double) {
@@ -42,13 +47,13 @@ final class ExchangeRatesViewModel {
         }
     }
 
-    func updateCurrentAmountFor(ratesFormatted: [RateFormatted],
-                                currentAmount: Double) -> [RateFormatted] {
-        return ratesFormatted.compactMap { $0.updateWith(currentAmount: currentAmount ) }
+    func getUpdatedRatesFormattedFor(currentAmount: Double) -> [RateFormatted] {
+        return self.ratesFormatted.map { $0.updateWith(currentAmount: currentAmount) }
     }
 
     private func updateViewModelParameters() {
         self.updateRates()
+        self.updateRatesFormatted()
         self.updateBaseRate()
         self.sendCompletionForSuccess()
         self.updatePreviousCode()
@@ -56,6 +61,12 @@ final class ExchangeRatesViewModel {
 
     private func updateRates() {
         self.rates = rateResult.getRateList().sorted(by: { $1.currencyCode > $0.currencyCode })
+    }
+
+    private func updateRatesFormatted() {
+        self.ratesFormatted = self.rates.map { RateFormatted(rate: $0,
+                                                              currencyNameManager: self.currencyNameManager,
+                                                              countryFlagsManager: self.countryFlagsManager)}
     }
 
     private func updateBaseRate() {

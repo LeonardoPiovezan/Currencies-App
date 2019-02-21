@@ -52,18 +52,13 @@ final class ExchangeRatesView: UIViewController {
 
     func setupViewModel() {
         self.viewModel = ExchangeRatesViewModel(exchangeRateService: self.exchangeRatesService,
-                                                currencyNameManager: self.currencyNameManager)
+                                                currencyNameManager: self.currencyNameManager, countryFlagsManager: self.countryFlagsManager)
         self.viewModel.didReceiveRates = { [weak self] shouldKeepData in
-
             guard let self = self else { return }
             self.firstRate = self.viewModel.baseRate
 
             self.ratesFormatted = self.viewModel
-                .rates
-                .map { RateFormatted(rate: $0,
-                                     currencyNameManager: self.currencyNameManager,
-                                     countryFlagsManager: self.countryFlagsManager)
-                    .updateWith(currentAmount: self.currentAmount)}
+                .getUpdatedRatesFormattedFor(currentAmount: self.currentAmount)
             if shouldKeepData {
                 self.updateTableView()
             } else {
@@ -154,8 +149,7 @@ extension ExchangeRatesView: UITableViewDataSource {
     self.currentAmount = numberString.toDouble()
 
     self.ratesFormatted = self.viewModel
-        .updateCurrentAmountFor(ratesFormatted: self.ratesFormatted,
-                                currentAmount: self.currentAmount)
+        .getUpdatedRatesFormattedFor(currentAmount: self.currentAmount)
 
     self.updateTableView()
   }

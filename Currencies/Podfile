@@ -9,13 +9,13 @@ target 'Currencies' do
   pod 'SnapKit'
   pod 'Swinject'
   pod 'Moya'
+  pod 'FlagKit'
 
   target 'CurrenciesTests' do
     inherit! :search_paths
     # Pods for testing
     pod 'Quick'
     pod 'Nimble'
-    pod 'KIF'
   end
 
   target 'CurrenciesUITests' do

@@ -67,8 +67,6 @@ final class ExchangeRatesView: UIViewController {
             if shouldKeepData {
                 self.updateTableView()
             } else {
-                self.currentAmount = 0.0
-                self.screen.tableView.scrollToTop()
                 self.screen.tableView.reloadData()
             }
         }
@@ -82,7 +80,7 @@ final class ExchangeRatesView: UIViewController {
         self.screen.tableView.indexPathsForVisibleRows?
             .filter { $0.row != 0 }
             .forEach { [weak self] index in
-                let cell = self?.screen.tableView.cellForRow(at: index) as! ExchangeRateCell
+              guard let cell = self?.screen.tableView.cellForRow(at: index) as? ExchangeRateCell else { return }
                 cell.bindTo(rateFormatted: self!.ratesFormatted[index.row])
         }
     }
@@ -92,6 +90,16 @@ final class ExchangeRatesView: UIViewController {
             self?.viewModel.updateRatesFor(countryCode: currencyCode, currentAmount: self?.currentAmount ?? 0.00)
         }
         self.timer?.fire()
+    }
+
+    func moveToTopSelectedCell(in indexPath: IndexPath) {
+        let firstIndex = IndexPath(row: 0, section: 0)
+        self.screen.tableView.moveRow(at: indexPath, to: firstIndex)
+        self.screen.tableView.scrollToTop()
+    }
+
+    func clearCurrentAmount() {
+        self.currentAmount = 0.0
     }
 }
 
@@ -104,12 +112,11 @@ extension ExchangeRatesView: UITableViewDelegate {
         }
 
         self.timer?.invalidate()
+
+        self.moveToTopSelectedCell(in: indexPath)
+        self.clearCurrentAmount()
+
         let rate = self.ratesFormatted[indexPath.row]
-        let firstIndex = IndexPath(row: 0, section: 0)
-
-        self.screen.tableView.moveRow(at: indexPath, to: firstIndex)
-        self.screen.tableView.scrollToTop()
-
         self.requestRatesFor(currencyCode: rate.currencyCode)
     }
 
@@ -131,7 +138,7 @@ extension ExchangeRatesView: UITableViewDataSource {
                                                      countryFlagsManager: self.countryFlagsManager))
             cell.view.amountTextField.text = String(format: "%.2f", self.currentAmount)
             cell.view.amountTextField.isUserInteractionEnabled = true
-          cell.view.amountTextField.delegate = self
+            cell.view.amountTextField.delegate = self
             cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell
         }

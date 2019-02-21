@@ -16,8 +16,6 @@ target 'Currencies' do
     # Pods for testing
     pod 'Quick'
     pod 'Nimble'
-    pod 'KIF'
-    pod 'Nimble-Snapshots'
   end
 
   target 'CurrenciesUITests' do

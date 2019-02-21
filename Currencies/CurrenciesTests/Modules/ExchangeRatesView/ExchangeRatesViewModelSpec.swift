@@ -47,11 +47,15 @@ class ExchangeRatesViewModelSpec: QuickSpec {
                     let rates = self.subject.rates.map { RateFormatted(rate: $0,
                                                                        currencyNameManager: self.currencyNameManager,
                                                                        countryFlagsManager: CountryFlagsManagerImpl())}
-                    let newRatesFormatted = self.subject.updateCurrentAmountFor(ratesFormatted: rates, currentAmount: 10)
+                    var newRatesFormatted = self.subject.updateCurrentAmountFor(ratesFormatted: rates, currentAmount: 10)
 
-                    let amounts = newRatesFormatted.map { $0.finalAmount }
+                    var amounts = newRatesFormatted.map { $0.finalAmount }
 
                     expect(amounts) == ["40.00", "10.00", "15.00"]
+
+                    newRatesFormatted = self.subject.updateCurrentAmountFor(ratesFormatted: rates, currentAmount: 100)
+                    amounts = newRatesFormatted.map { $0.finalAmount }
+                    expect(amounts) == ["400.00", "100.00", "150.00"]
 
                 }
 

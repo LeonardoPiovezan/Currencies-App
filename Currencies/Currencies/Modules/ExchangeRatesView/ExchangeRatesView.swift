@@ -130,7 +130,8 @@ extension ExchangeRatesView: UITableViewDataSource {
                                                      currencyNameManager: self.currencyNameManager,
                                                      countryFlagsManager: self.countryFlagsManager))
             cell.view.amountTextField.text = String(format: "%.2f", self.currentAmount)
-cell.view.amountTextField.isUserInteractionEnabled = true
+            cell.view.amountTextField.isUserInteractionEnabled = true
+          cell.view.amountTextField.delegate = self
             cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell
         }
@@ -150,5 +151,14 @@ cell.view.amountTextField.isUserInteractionEnabled = true
                                 currentAmount: self.currentAmount)
 
     self.updateTableView()
+  }
+}
+
+extension ExchangeRatesView: UITextFieldDelegate {
+
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.text == "0.00" {
+      textField.text = ""
+    }
   }
 }

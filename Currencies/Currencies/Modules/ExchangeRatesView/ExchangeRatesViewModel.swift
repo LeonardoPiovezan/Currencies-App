@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Moya
 
 final class ExchangeRatesViewModel {
 

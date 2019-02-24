@@ -10,6 +10,7 @@
 		1A42445B2221CD0C00B70A82 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42445A2221CD0C00B70A82 /* Result.swift */; };
 		1A42445D2221D3BA00B70A82 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42445C2221D3BA00B70A82 /* Endpoint.swift */; };
 		1A42445F2221E6BC00B70A82 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A42445E2221E6BC00B70A82 /* APIClient.swift */; };
+		1A4244642222312C00B70A82 /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4244632222312C00B70A82 /* UIView+Constraints.swift */; };
 		1A4B9BDC221B86460069E4CF /* ExchangeRateCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B9BDB221B86460069E4CF /* ExchangeRateCellView.swift */; };
 		1A4B9BE0221B8F980069E4CF /* ShadowedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B9BDF221B8F980069E4CF /* ShadowedTextField.swift */; };
 		1A4B9BE3221B94BD0069E4CF /* UITableView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4B9BE2221B94BD0069E4CF /* UITableView+Utils.swift */; };
@@ -79,6 +80,7 @@
 		1A42445A2221CD0C00B70A82 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		1A42445C2221D3BA00B70A82 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		1A42445E2221E6BC00B70A82 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		1A4244632222312C00B70A82 /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		1A4B9BDB221B86460069E4CF /* ExchangeRateCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateCellView.swift; sourceTree = "<group>"; };
 		1A4B9BDF221B8F980069E4CF /* ShadowedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowedTextField.swift; sourceTree = "<group>"; };
 		1A4B9BE2221B94BD0069E4CF /* UITableView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Utils.swift"; sourceTree = "<group>"; };
@@ -165,6 +167,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A4244622222311200B70A82 /* Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				1A4244632222312C00B70A82 /* UIView+Constraints.swift */,
+			);
+			name = Constraints;
+			sourceTree = "<group>";
+		};
 		1A4B9BDD221B8F6C0069E4CF /* TextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +448,7 @@
 		1AEC0BF8220A5E2900734977 /* CodeView */ = {
 			isa = PBXGroup;
 			children = (
+				1A4244622222311200B70A82 /* Constraints */,
 				1A9B28CA2210BD7D0014FA3A /* ImageView */,
 				1A9B28C22210B5470014FA3A /* TableView */,
 				1A9B28B7220FB94C0014FA3A /* Label */,
@@ -706,7 +717,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Currencies/Pods-Currencies-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FlagKit/FlagKit.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -714,7 +724,6 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlagKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -800,6 +809,7 @@
 				1A9B28E4221103760014FA3A /* RateFormatted.swift in Sources */,
 				1A9B28B1220F560C0014FA3A /* ExchangeRatesServiceImpl.swift in Sources */,
 				1A42445B2221CD0C00B70A82 /* Result.swift in Sources */,
+				1A4244642222312C00B70A82 /* UIView+Constraints.swift in Sources */,
 				1A42445F2221E6BC00B70A82 /* APIClient.swift in Sources */,
 				1A9B28E02210F2EA0014FA3A /* DefaultContainer+Manager.swift in Sources */,
 				1AEC0C14220A697A00734977 /* ExchangeRatesViewScreen.swift in Sources */,

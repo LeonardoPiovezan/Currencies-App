@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Moya
 
 final class ExchangeRatesView: UIViewController {
     private let exchangeRatesService: ExchangeRatesService

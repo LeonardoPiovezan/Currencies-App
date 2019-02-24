@@ -8,7 +8,6 @@
 
 import Quick
 import Nimble
-import Result
 
 @testable import Currencies
 class ExchangeRatesViewModelSpec: QuickSpec {
@@ -21,6 +20,8 @@ class ExchangeRatesViewModelSpec: QuickSpec {
         describe("Exchange Rates View Behaviour") {
             context("Received Rates From Service") {
                 beforeEach {
+
+
                     let result = Result<RateResult, NetworkError>.success(RateResult(base: "EUR", date: "10-02-2019", rates: ["EUR": 1.0, "BRL": 4.0, "USD": 1.5]))
 
                     self.ratesService = MockExchangeRateService(ratesResult: result)
@@ -91,7 +92,7 @@ class ExchangeRatesViewModelSpec: QuickSpec {
 
             context("Check Condition For Error From Service") {
                 beforeEach {
-                    let result = Result<RateResult, NetworkError>.failure(NetworkError(message: "Failed to Download"))
+                    let result = Result<RateResult, NetworkError>.failure(NetworkError.responseUnsuccessful)
                     self.ratesService = MockExchangeRateService(ratesResult: result)
                     self.subject = ExchangeRatesViewModel(exchangeRateService: self.ratesService,
                                                           currencyNameManager: CurrencyNameManagerImpl(), countryFlagsManager: self.countryFlagsManager)
@@ -100,7 +101,7 @@ class ExchangeRatesViewModelSpec: QuickSpec {
                 it("Check if error message is not nil") {
                     self.subject.failedToReceiveRates = { error in
                         let networkError = error as! NetworkError
-                        expect(networkError.localizedDescription).to(equal("Failed to Download"))
+                        expect(networkError.localizedDescription).to(equal("Response Unsuccessful"))
                     }
                     self.subject.updateRatesFor(countryCode: "country",
                                                 currentAmount: 0.0)

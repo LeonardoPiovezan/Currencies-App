@@ -8,7 +8,6 @@ target 'Currencies' do
   # Pods for Currencies
   pod 'SnapKit'
   pod 'Swinject'
-  pod 'Moya'
   pod 'FlagKit'
 
   target 'CurrenciesTests' do

@@ -7,31 +7,17 @@
 //
 
 import Foundation
-import Result
-import Moya
 final class ExchangeRatesServiceImpl: ExchangeRatesService {
-    private let exchangeRatesRepository: ExchangeRatesRepository
 
-    init(exchangeRatesRepository: ExchangeRatesRepository) {
-        self.exchangeRatesRepository = exchangeRatesRepository
+    private let client: APIClient
+
+    init(client: APIClient) {
+        self.client = client
     }
-
     func getRatesFor(countryCode: String, completion: @escaping (Result<RateResult, NetworkError>) -> Void) {
-        self.exchangeRatesRepository.getRatesFor(countryCode: countryCode) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let rateResult = try response.map(RateResult.self)
-                  print(rateResult)
-                    completion(Result.success(rateResult))
-                } catch let error {
-                    let networkError = NetworkError(message: error.localizedDescription)
-                    completion(Result.failure(networkError))
-                }
-            case .failure(let error):
-                let networkError = NetworkError(message: error.localizedDescription)
-                completion(Result.failure(networkError))
-            }
-        }
+        self.client.fetch(with: ExchangeRatesRouter.getRatesFor(countryCode: countryCode).request,
+                   decode: { json -> RateResult in
+                    return json as! RateResult
+        }, completion: completion)
     }
 }

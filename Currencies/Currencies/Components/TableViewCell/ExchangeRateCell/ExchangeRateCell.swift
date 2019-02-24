@@ -45,9 +45,8 @@ extension ExchangeRateCell: CodeView {
     }
 
     func setupConstraints() {
-        self.view.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        self.view.prepareForConstraints()
+        self.view.pinEdgesToSuperview()
     }
 
     func setupAdditionalConfiguration() {

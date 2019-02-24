@@ -11,7 +11,7 @@ import UIKit
 
 final class AppCoordinator: Coordinator {
     
-    private let window: UIWindow
+    private weak var window: UIWindow?
     private let container: DefaultContainer
     
     init(window: UIWindow,
@@ -24,7 +24,7 @@ final class AppCoordinator: Coordinator {
         
         let exchangeView = container.container.resolve(ExchangeRatesView.self)!
         
-        self.window.rootViewController = exchangeView
+        self.window?.rootViewController = exchangeView
         
     }
 }

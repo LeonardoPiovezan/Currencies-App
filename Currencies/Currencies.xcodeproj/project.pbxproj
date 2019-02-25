@@ -22,14 +22,7 @@
 		1A9B28AF220F55F70014FA3A /* ExchangeRatesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28AE220F55F70014FA3A /* ExchangeRatesService.swift */; };
 		1A9B28B1220F560C0014FA3A /* ExchangeRatesServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28B0220F560C0014FA3A /* ExchangeRatesServiceImpl.swift */; };
 		1A9B28B4220F58190014FA3A /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28B3220F58190014FA3A /* NetworkError.swift */; };
-		1A9B28B9220FB9A30014FA3A /* LabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28B8220FB9A30014FA3A /* LabelBuilder.swift */; };
-		1A9B28BC220FC30B0014FA3A /* LabelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28BB220FC30B0014FA3A /* LabelDescriptor.swift */; };
-		1A9B28BF220FC4BB0014FA3A /* Label+Descriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28BE220FC4BB0014FA3A /* Label+Descriptor.swift */; };
-		1A9B28C1220FC73B0014FA3A /* TitleLabelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28C0220FC73B0014FA3A /* TitleLabelDescriptor.swift */; };
-		1A9B28C52210B57D0014FA3A /* TableViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28C42210B57D0014FA3A /* TableViewBuilder.swift */; };
 		1A9B28C92210BCA90014FA3A /* ExchangeRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28C82210BCA90014FA3A /* ExchangeRateCell.swift */; };
-		1A9B28CC2210BD910014FA3A /* ImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28CB2210BD910014FA3A /* ImageViewBuilder.swift */; };
-		1A9B28CE2210C3340014FA3A /* SubTitleLabelDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28CD2210C3330014FA3A /* SubTitleLabelDescriptor.swift */; };
 		1A9B28D22210DD950014FA3A /* ExchangeRatesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28D12210DD950014FA3A /* ExchangeRatesViewModelSpec.swift */; };
 		1A9B28D72210DE890014FA3A /* MockExchangeRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28D62210DE890014FA3A /* MockExchangeRateService.swift */; };
 		1A9B28DC2210F0FC0014FA3A /* CurrencyNameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9B28DB2210F0FC0014FA3A /* CurrencyNameManager.swift */; };
@@ -92,14 +85,7 @@
 		1A9B28AE220F55F70014FA3A /* ExchangeRatesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesService.swift; sourceTree = "<group>"; };
 		1A9B28B0220F560C0014FA3A /* ExchangeRatesServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesServiceImpl.swift; sourceTree = "<group>"; };
 		1A9B28B3220F58190014FA3A /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		1A9B28B8220FB9A30014FA3A /* LabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBuilder.swift; sourceTree = "<group>"; };
-		1A9B28BB220FC30B0014FA3A /* LabelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDescriptor.swift; sourceTree = "<group>"; };
-		1A9B28BE220FC4BB0014FA3A /* Label+Descriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Label+Descriptor.swift"; sourceTree = "<group>"; };
-		1A9B28C0220FC73B0014FA3A /* TitleLabelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabelDescriptor.swift; sourceTree = "<group>"; };
-		1A9B28C42210B57D0014FA3A /* TableViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewBuilder.swift; sourceTree = "<group>"; };
 		1A9B28C82210BCA90014FA3A /* ExchangeRateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateCell.swift; sourceTree = "<group>"; };
-		1A9B28CB2210BD910014FA3A /* ImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewBuilder.swift; sourceTree = "<group>"; };
-		1A9B28CD2210C3330014FA3A /* SubTitleLabelDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleLabelDescriptor.swift; sourceTree = "<group>"; };
 		1A9B28D12210DD950014FA3A /* ExchangeRatesViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRatesViewModelSpec.swift; sourceTree = "<group>"; };
 		1A9B28D62210DE890014FA3A /* MockExchangeRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockExchangeRateService.swift; sourceTree = "<group>"; };
 		1A9B28DB2210F0FC0014FA3A /* CurrencyNameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyNameManager.swift; sourceTree = "<group>"; };
@@ -236,50 +222,6 @@
 			path = APIClient;
 			sourceTree = "<group>";
 		};
-		1A9B28B6220FB8F30014FA3A /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				1A9B28B8220FB9A30014FA3A /* LabelBuilder.swift */,
-			);
-			name = Builder;
-			sourceTree = "<group>";
-		};
-		1A9B28B7220FB94C0014FA3A /* Label */ = {
-			isa = PBXGroup;
-			children = (
-				1A9B28B6220FB8F30014FA3A /* Builder */,
-				1A9B28BD220FC43C0014FA3A /* Descriptor */,
-			);
-			name = Label;
-			sourceTree = "<group>";
-		};
-		1A9B28BD220FC43C0014FA3A /* Descriptor */ = {
-			isa = PBXGroup;
-			children = (
-				1A9B28BB220FC30B0014FA3A /* LabelDescriptor.swift */,
-				1A9B28BE220FC4BB0014FA3A /* Label+Descriptor.swift */,
-				1A9B28C0220FC73B0014FA3A /* TitleLabelDescriptor.swift */,
-				1A9B28CD2210C3330014FA3A /* SubTitleLabelDescriptor.swift */,
-			);
-			name = Descriptor;
-			sourceTree = "<group>";
-		};
-		1A9B28C22210B5470014FA3A /* TableView */ = {
-			isa = PBXGroup;
-			children = (
-				1A9B28C32210B5690014FA3A /* Builder */,
-			);
-			name = TableView;
-			sourceTree = "<group>";
-		};
-		1A9B28C32210B5690014FA3A /* Builder */ = {
-			isa = PBXGroup;
-			children = (
-				1A9B28C42210B57D0014FA3A /* TableViewBuilder.swift */,
-			);
-			name = Builder;
-			sourceTree = "<group>";
-		};
 		1A9B28C62210BC7A0014FA3A /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,14 +237,6 @@
 				1A4B9BDB221B86460069E4CF /* ExchangeRateCellView.swift */,
 			);
 			path = ExchangeRateCell;
-			sourceTree = "<group>";
-		};
-		1A9B28CA2210BD7D0014FA3A /* ImageView */ = {
-			isa = PBXGroup;
-			children = (
-				1A9B28CB2210BD910014FA3A /* ImageViewBuilder.swift */,
-			);
-			name = ImageView;
 			sourceTree = "<group>";
 		};
 		1A9B28CF2210DD730014FA3A /* Modules */ = {
@@ -449,9 +383,6 @@
 			isa = PBXGroup;
 			children = (
 				1A4244622222311200B70A82 /* Constraints */,
-				1A9B28CA2210BD7D0014FA3A /* ImageView */,
-				1A9B28C22210B5470014FA3A /* TableView */,
-				1A9B28B7220FB94C0014FA3A /* Label */,
 				1AEC0C02220A604A00734977 /* CodeView.swift */,
 			);
 			path = CodeView;
@@ -818,28 +749,21 @@
 				1AEC0C03220A604A00734977 /* CodeView.swift in Sources */,
 				1A9B28AF220F55F70014FA3A /* ExchangeRatesService.swift in Sources */,
 				1A9B28C92210BCA90014FA3A /* ExchangeRateCell.swift in Sources */,
-				1A9B28CC2210BD910014FA3A /* ImageViewBuilder.swift in Sources */,
 				1AEC0C05220A632000734977 /* DefaultContainer.swift in Sources */,
 				1A695B42221CF2B50084C712 /* CountryFlagsManager.swift in Sources */,
 				1A4B9BE0221B8F980069E4CF /* ShadowedTextField.swift in Sources */,
 				1A42445D2221D3BA00B70A82 /* Endpoint.swift in Sources */,
 				1AEC0C01220A602300734977 /* Coordinator.swift in Sources */,
-				1A9B28C1220FC73B0014FA3A /* TitleLabelDescriptor.swift in Sources */,
 				1AEC0C0D220A65B800734977 /* AppCoordinator.swift in Sources */,
 				1AEC0C12220A696100734977 /* ExchangeRatesViewModel.swift in Sources */,
 				1AEC0C09220A636F00734977 /* DefaultContainer+APIClient.swift in Sources */,
 				1A9B28DE2210F1D80014FA3A /* CurrencyNameManagerImpl.swift in Sources */,
 				1AEC0C21220A7B3C00734977 /* RateResult.swift in Sources */,
 				1A695B44221CF2F10084C712 /* CountryFlagsManagerImpl.swift in Sources */,
-				1A9B28BF220FC4BB0014FA3A /* Label+Descriptor.swift in Sources */,
 				1AEC0BC8220A5B4400734977 /* AppDelegate.swift in Sources */,
 				1AEC0C10220A694A00734977 /* ExchangeRatesView.swift in Sources */,
 				1AEC0C1D220A71FD00734977 /* Constants.swift in Sources */,
-				1A9B28B9220FB9A30014FA3A /* LabelBuilder.swift in Sources */,
-				1A9B28C52210B57D0014FA3A /* TableViewBuilder.swift in Sources */,
-				1A9B28BC220FC30B0014FA3A /* LabelDescriptor.swift in Sources */,
 				1A9B28DC2210F0FC0014FA3A /* CurrencyNameManager.swift in Sources */,
-				1A9B28CE2210C3340014FA3A /* SubTitleLabelDescriptor.swift in Sources */,
 				1AEC0C07220A634B00734977 /* DefaultContainer+Services.swift in Sources */,
 				1AEC0C1B220A717100734977 /* ExchangeRatesRouter.swift in Sources */,
 				1A4B9BE3221B94BD0069E4CF /* UITableView+Utils.swift in Sources */,

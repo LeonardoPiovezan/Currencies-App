@@ -91,10 +91,6 @@ final class ExchangeRatesView: UIViewController {
         self.screen.tableView.moveRow(at: indexPath, to: firstIndex)
         self.screen.tableView.scrollToTop()
     }
-
-    func clearCurrentAmount() {
-        self.currentAmount = 0.0
-    }
 }
 
 extension ExchangeRatesView: UITableViewDelegate {
@@ -108,9 +104,8 @@ extension ExchangeRatesView: UITableViewDelegate {
         self.timer?.invalidate()
 
         self.moveToTopSelectedCell(in: indexPath)
-        self.clearCurrentAmount()
-
         let rate = self.ratesFormatted[indexPath.row]
+        self.currentAmount = rate.finalAmount?.toDouble() ?? 0
         self.requestRatesFor(currencyCode: rate.currencyCode)
     }
 

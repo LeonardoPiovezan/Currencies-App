@@ -20,8 +20,6 @@ class ExchangeRatesViewModelSpec: QuickSpec {
         describe("Exchange Rates View Behaviour") {
             context("Received Rates From Service") {
                 beforeEach {
-
-
                     let result = Result<RateResult, NetworkError>.success(RateResult(base: "EUR", date: "10-02-2019", rates: ["EUR": 1.0, "BRL": 4.0, "USD": 1.5]))
 
                     self.ratesService = MockExchangeRateService(ratesResult: result)
@@ -58,6 +56,13 @@ class ExchangeRatesViewModelSpec: QuickSpec {
                     amounts = newRatesFormatted.map { $0.finalAmount }
                     expect(amounts) == ["400.00", "100.00", "150.00"]
 
+                }
+
+                it("Check Should Change TextField Function") {
+
+                    let amounts = ["10", "10.", "1","", "0", "."]
+                    let subjectsArray = amounts.map { self.subject.shouldChangeAmountTextField(amountString: $0)}
+                    expect(subjectsArray) == [true,true,true,true,false,false]
                 }
 
 

@@ -38,9 +38,6 @@ class StringSpec: QuickSpec {
                 expect(subject) == 0
             }
         }
-<<<<<<< HEAD
-=======
-
         describe("Is Valid Double Function Behaviour") {
 
             it("Check Value When It I A Valid Double") {
@@ -73,6 +70,5 @@ class StringSpec: QuickSpec {
                 expect(subject) == false
             }
         }
->>>>>>> develop
     }
 }

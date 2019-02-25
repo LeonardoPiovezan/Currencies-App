@@ -46,8 +46,9 @@ final class ExchangeRatesViewModel {
         }
     }
 
-    func shouldChangeAmountTextField(amountString: String) -> Bool {
-        let isNotLeftZero = amountString != "0"
+    func shouldChangeAmountTextField(amountString: String,
+                                     previousString: String) -> Bool {
+        let isNotLeftZero = !(amountString == "00" && previousString == "0")
         let isValidDouble = amountString.isValidDouble(maxDecimalPlaces: 4)
         let isEmpty = amountString.isEmpty
         return ((isValidDouble || isEmpty) && isNotLeftZero)

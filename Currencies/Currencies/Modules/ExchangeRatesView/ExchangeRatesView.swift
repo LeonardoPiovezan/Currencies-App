@@ -151,7 +151,7 @@ extension ExchangeRatesView: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
-        let shouldChange = self.viewModel.shouldChangeAmountTextField(amountString: replacementText)
+        let shouldChange = self.viewModel.shouldChangeAmountTextField(amountString: replacementText, previousString: currentText)
         if shouldChange {
             self.currentAmount = replacementText.toDouble()
 

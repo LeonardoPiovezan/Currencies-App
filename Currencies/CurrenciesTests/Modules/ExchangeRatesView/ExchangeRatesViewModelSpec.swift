@@ -8,10 +8,6 @@
 
 import Quick
 import Nimble
-<<<<<<< HEAD
-import Result
-=======
->>>>>>> develop
 
 @testable import Currencies
 class ExchangeRatesViewModelSpec: QuickSpec {
@@ -62,17 +58,18 @@ class ExchangeRatesViewModelSpec: QuickSpec {
 
                 }
 
-<<<<<<< HEAD
-=======
-                it("Check Should Change TextField Function") {
+                it("Check Should Change TextField Function First Digit") {
 
-                    let amounts = ["10", "10.", "1","", "0", "."]
-                    let subjectsArray = amounts.map { self.subject.shouldChangeAmountTextField(amountString: $0)}
-                    expect(subjectsArray) == [true,true,true,true,false,false]
+                    let amounts = ["1", "5", "9","", "0", "."]
+                    let subjectsArray = amounts.map { self.subject.shouldChangeAmountTextField(amountString: $0, previousString: "")}
+                    expect(subjectsArray) == [true,true,true,true,true,false]
                 }
 
->>>>>>> develop
+                it("Check Should Change TextField Function Valid Input") {
 
+                    let subject = self.subject.shouldChangeAmountTextField(amountString: "1.", previousString: "1")
+                    expect(subject) == true
+                }
 
                 context("Check Multiples Requests Call") {
                     beforeEach {
@@ -104,11 +101,7 @@ class ExchangeRatesViewModelSpec: QuickSpec {
 
             context("Check Condition For Error From Service") {
                 beforeEach {
-<<<<<<< HEAD
-                    let result = Result<RateResult, NetworkError>.failure(NetworkError(message: "Failed to Download"))
-=======
                     let result = Result<RateResult, NetworkError>.failure(NetworkError.responseUnsuccessful)
->>>>>>> develop
                     self.ratesService = MockExchangeRateService(ratesResult: result)
                     self.subject = ExchangeRatesViewModel(exchangeRateService: self.ratesService,
                                                           currencyNameManager: CurrencyNameManagerImpl(), countryFlagsManager: self.countryFlagsManager)
@@ -117,11 +110,8 @@ class ExchangeRatesViewModelSpec: QuickSpec {
                 it("Check if error message is not nil") {
                     self.subject.failedToReceiveRates = { error in
                         let networkError = error as! NetworkError
-<<<<<<< HEAD
-                        expect(networkError.localizedDescription).to(equal("Failed to Download"))
-=======
+
                         expect(networkError.localizedDescription).to(equal("Response Unsuccessful"))
->>>>>>> develop
                     }
                     self.subject.updateRatesFor(countryCode: "country",
                                                 currentAmount: 0.0)

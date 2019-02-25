@@ -25,7 +25,7 @@ If you tap other currencies, they will become the base one.
 Each 1 second the App gets new currency rates from the API.
 
 This application was developed using MVVM-C.
-The views were created using only code with the help of SnapKit to create the constraints.
+The views were created using only code.
 One module in the app is basically composed by 3 files:
 
 - View: It is the viewController, responsible to handle the lifecycle of the app and intermediate the viewModel and the viewScreen
@@ -34,7 +34,7 @@ One module in the app is basically composed by 3 files:
 
 - ViewScreen: It is a class that defines the construction of the View. No logic is held on that. 
 
-The classes are binded using closures that also helps on the asyncronous calls alongside Moya.
+The classes are binded using closures that also helps on the asyncronous calls.
 
 The navigation flow is using a Coordinator class, that is responsible for 
 show the modules.

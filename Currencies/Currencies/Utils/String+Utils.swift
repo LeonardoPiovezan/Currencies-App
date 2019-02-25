@@ -10,7 +10,8 @@ import Foundation
 
 extension String {
     func toDouble() -> Double {
-        return Double(self) ?? 0.0
+        let value = self.replacingOccurrences(of: ",", with: ".")
+        return Double(value) ?? 0.0
     }
 }
 
@@ -20,8 +21,16 @@ extension String {
         formatter.allowsFloats = true
         let decimalSeparator = formatter.decimalSeparator ?? "."
 
-        if formatter.number(from: self) != nil {
-            let splitString = self.components(separatedBy: decimalSeparator)
+        var value = self
+        if decimalSeparator == "," {
+            value = self.replacingOccurrences(of: ".", with: ",")
+        } else if decimalSeparator == "." {
+            value = self.replacingOccurrences(of: ",", with: ".")
+        }
+
+        if formatter.number(from: value) != nil {
+            let splitString = value.components(separatedBy: decimalSeparator)
+
             let digits = splitString.count == 2 ? splitString.last ?? "" : ""
             return digits.count <= maxDecimalPlaces
         }

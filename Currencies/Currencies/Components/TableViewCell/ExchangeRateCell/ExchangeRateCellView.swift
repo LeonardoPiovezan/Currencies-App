@@ -10,9 +10,9 @@ import UIKit
 
 final class ExchangeRateCellView: UIView {
     lazy var countryImageView: UIImageView = {
-        return UIImageView.Builder()
-            .withContentMode(.scaleAspectFit)
-            .build()
+        let imageView = UIImageView(frame: CGRect.zero)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
     private var labelswrapperView: UIView = {
@@ -20,15 +20,19 @@ final class ExchangeRateCellView: UIView {
     }()
 
     lazy var currencyCodeLabel: UILabel = {
-        return UILabel.Builder()
-            .withDescriptor(TitleLabelDescriptor())
-            .build()
+        let label = UILabel(frame: CGRect.zero)
+        label.numberOfLines = 0
+        label.font = UIFont(name: Constants.Font.helveticaNeue, size: 17)!
+        label.textColor = .black
+        return label
     }()
 
     lazy var currencyNameLabel: UILabel = {
-        return UILabel.Builder()
-            .withDescriptor(SubTitleLabelDescriptor())
-            .build()
+        let label = UILabel(frame: CGRect.zero)
+        label.numberOfLines = 0
+        label.font = UIFont(name: Constants.Font.helveticaNeueLight, size: 14)!
+        label.textColor = .gray
+        return label
     }()
 
     lazy var amountTextField: ShadowedTextField = {

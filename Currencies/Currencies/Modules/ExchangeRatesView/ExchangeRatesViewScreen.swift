@@ -10,10 +10,9 @@ import UIKit
 
 final class ExchangeRatesViewScreen: UIView {
     lazy var tableView: UITableView = {
-        return UITableView
-            .Builder()
-            .withSeparatorStyle(.none)
-            .build()
+        let tableView = UITableView(frame: CGRect.zero)
+        tableView.separatorStyle = .none
+        return tableView
     }()
 
     init() {

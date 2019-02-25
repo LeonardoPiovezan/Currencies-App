@@ -13,3 +13,18 @@ extension String {
         return Double(self) ?? 0.0
     }
 }
+
+extension String {
+    func isValidDouble(maxDecimalPlaces: Int) -> Bool {
+        let formatter = NumberFormatter()
+        formatter.allowsFloats = true
+        let decimalSeparator = formatter.decimalSeparator ?? "."
+
+        if formatter.number(from: self) != nil {
+            let splitString = self.components(separatedBy: decimalSeparator)
+            let digits = splitString.count == 2 ? splitString.last ?? "" : ""
+            return digits.count <= maxDecimalPlaces
+        }
+        return false
+    }
+}

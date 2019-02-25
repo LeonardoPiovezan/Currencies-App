@@ -46,6 +46,13 @@ final class ExchangeRatesViewModel {
         }
     }
 
+    func shouldChangeAmountTextField(amountString: String) -> Bool {
+        let isNotLeftZero = amountString != "0"
+        let isValidDouble = amountString.isValidDouble(maxDecimalPlaces: 4)
+        let isEmpty = amountString.isEmpty
+        return ((isValidDouble || isEmpty) && isNotLeftZero)
+    }
+
     func getUpdatedRatesFormattedFor(currentAmount: Double) -> [RateFormatted] {
         return self.ratesFormatted.map { $0.updateWith(currentAmount: currentAmount) }
     }

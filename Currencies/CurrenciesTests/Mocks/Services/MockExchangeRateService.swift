@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 
 @testable import Currencies
 final class MockExchangeRateService: ExchangeRatesService {

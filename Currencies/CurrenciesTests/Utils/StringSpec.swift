@@ -38,5 +38,41 @@ class StringSpec: QuickSpec {
                 expect(subject) == 0
             }
         }
+<<<<<<< HEAD
+=======
+
+        describe("Is Valid Double Function Behaviour") {
+
+            it("Check Value When It I A Valid Double") {
+                let string = "10.00"
+                let subject = string.isValidDouble(maxDecimalPlaces: 4)
+                expect(subject) == true
+            }
+
+            it("Check Value When It I A Valid Int") {
+                let string = "10"
+                let subject = string.isValidDouble(maxDecimalPlaces: 4)
+                expect(subject) == true
+            }
+
+            it("Check Value When It I Not A Valid Double") {
+                let string = "notanumber"
+                let subject = string.isValidDouble(maxDecimalPlaces: 4)
+                expect(subject) == false
+            }
+
+            it("Check Value When Empty String") {
+                let string = ""
+                let subject = string.isValidDouble(maxDecimalPlaces: 4)
+                expect(subject) == false
+            }
+
+            it("Check When Value Has More Decimal Places") {
+                let string = "10.00001"
+                let subject = string.isValidDouble(maxDecimalPlaces: 4)
+                expect(subject) == false
+            }
+        }
+>>>>>>> develop
     }
 }

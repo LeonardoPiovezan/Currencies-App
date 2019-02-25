@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Moya
 
 final class ExchangeRatesViewModel {
 
@@ -45,6 +44,13 @@ final class ExchangeRatesViewModel {
                 self.failedToReceiveRates?(error)
             }
         }
+    }
+
+    func shouldChangeAmountTextField(amountString: String) -> Bool {
+        let isNotLeftZero = amountString != "0"
+        let isValidDouble = amountString.isValidDouble(maxDecimalPlaces: 4)
+        let isEmpty = amountString.isEmpty
+        return ((isValidDouble || isEmpty) && isNotLeftZero)
     }
 
     func getUpdatedRatesFormattedFor(currentAmount: Double) -> [RateFormatted] {

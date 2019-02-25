@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Moya
 
 final class ExchangeRatesView: UIViewController {
     private let exchangeRatesService: ExchangeRatesService
@@ -92,10 +91,6 @@ final class ExchangeRatesView: UIViewController {
         self.screen.tableView.moveRow(at: indexPath, to: firstIndex)
         self.screen.tableView.scrollToTop()
     }
-
-    func clearCurrentAmount() {
-        self.currentAmount = 0.0
-    }
 }
 
 extension ExchangeRatesView: UITableViewDelegate {
@@ -109,9 +104,8 @@ extension ExchangeRatesView: UITableViewDelegate {
         self.timer?.invalidate()
 
         self.moveToTopSelectedCell(in: indexPath)
-        self.clearCurrentAmount()
-
         let rate = self.ratesFormatted[indexPath.row]
+        self.currentAmount = rate.finalAmount?.toDouble() ?? 0
         self.requestRatesFor(currencyCode: rate.currencyCode)
     }
 
@@ -134,7 +128,6 @@ extension ExchangeRatesView: UITableViewDataSource {
             cell.view.amountTextField.text = String(format: "%.2f", self.currentAmount)
             cell.view.amountTextField.isUserInteractionEnabled = true
             cell.view.amountTextField.delegate = self
-            cell.view.amountTextField.addTarget(self, action: #selector(editingChange(_:)), for: .editingChanged)
             return cell
         }
 
@@ -143,16 +136,6 @@ extension ExchangeRatesView: UITableViewDataSource {
         cell.view.amountTextField.isUserInteractionEnabled = false
         return cell
     }
-
-  @objc func editingChange(_ textField: UITextField) {
-    let numberString = textField.text ?? ""
-    self.currentAmount = numberString.toDouble()
-
-    self.ratesFormatted = self.viewModel
-        .getUpdatedRatesFormattedFor(currentAmount: self.currentAmount)
-
-    self.updateTableView()
-  }
 }
 
 extension ExchangeRatesView: UITextFieldDelegate {
@@ -162,4 +145,22 @@ extension ExchangeRatesView: UITextFieldDelegate {
       textField.text = ""
     }
   }
+
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
+        let currentText = textField.text ?? ""
+        let replacementText = (currentText as NSString).replacingCharacters(in: range, with: string)
+
+        let shouldChange = self.viewModel.shouldChangeAmountTextField(amountString: replacementText)
+        if shouldChange {
+            self.currentAmount = replacementText.toDouble()
+
+            self.ratesFormatted = self.viewModel
+                .getUpdatedRatesFormattedFor(currentAmount: self.currentAmount)
+
+            self.updateTableView()
+            return true
+        }
+        return false
+    }
 }

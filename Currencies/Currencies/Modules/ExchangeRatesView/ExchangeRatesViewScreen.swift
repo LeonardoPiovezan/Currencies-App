@@ -7,14 +7,12 @@
 //
 
 import UIKit
-import SnapKit
 
 final class ExchangeRatesViewScreen: UIView {
     lazy var tableView: UITableView = {
-        return UITableView
-            .Builder()
-            .withSeparatorStyle(.none)
-            .build()
+        let tableView = UITableView(frame: CGRect.zero)
+        tableView.separatorStyle = .none
+        return tableView
     }()
 
     init() {
@@ -33,9 +31,8 @@ extension ExchangeRatesViewScreen: CodeView {
     }
 
     func setupConstraints() {
-        self.tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        self.tableView.prepareForConstraints()
+        self.tableView.pinEdgesToSuperview()
     }
 
     func setupAdditionalConfiguration() {

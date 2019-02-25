@@ -6,9 +6,7 @@ target 'Currencies' do
   use_frameworks!
 
   # Pods for Currencies
-  pod 'SnapKit'
   pod 'Swinject'
-  pod 'Moya'
   pod 'FlagKit'
 
   target 'CurrenciesTests' do

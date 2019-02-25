@@ -10,9 +10,9 @@ import UIKit
 
 final class ExchangeRateCellView: UIView {
     lazy var countryImageView: UIImageView = {
-        return UIImageView.Builder()
-            .withContentMode(.scaleAspectFit)
-            .build()
+        let imageView = UIImageView(frame: CGRect.zero)
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
 
     private var labelswrapperView: UIView = {
@@ -20,15 +20,19 @@ final class ExchangeRateCellView: UIView {
     }()
 
     lazy var currencyCodeLabel: UILabel = {
-        return UILabel.Builder()
-            .withDescriptor(TitleLabelDescriptor())
-            .build()
+        let label = UILabel(frame: CGRect.zero)
+        label.numberOfLines = 0
+        label.font = UIFont(name: Constants.Font.helveticaNeue, size: 17)!
+        label.textColor = .black
+        return label
     }()
 
     lazy var currencyNameLabel: UILabel = {
-        return UILabel.Builder()
-            .withDescriptor(SubTitleLabelDescriptor())
-            .build()
+        let label = UILabel(frame: CGRect.zero)
+        label.numberOfLines = 0
+        label.font = UIFont(name: Constants.Font.helveticaNeueLight, size: 14)!
+        label.textColor = .gray
+        return label
     }()
 
     lazy var amountTextField: ShadowedTextField = {
@@ -65,41 +69,52 @@ extension ExchangeRateCellView: CodeView {
     }
 
     func setupConstraints() {
-        self.countryImageView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            make.leading.equalToSuperview().offset(8)
-            make.top.equalToSuperview().offset(8)
-            make.bottom.equalToSuperview().inset(8)
-            make.width.equalToSuperview().multipliedBy(0.10)
-            make.height.equalTo(self.countryImageView.snp.width)
-        }
+        self.setupCountryImageViewConstraints()
+        self.setupLabelsWrapperViewConstraints()
+        self.setupCurrencyCodeLabelConstraints()
+        self.setupCurrencyNameLabelConstraints()
+        self.setupAmountTextFieldConstraints()
+    }
 
-        self.labelswrapperView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            make.leading.equalTo(self.countryImageView.snp.trailing).offset(8)
-            make.centerY.equalTo(self.countryImageView.snp.centerY)
-            make.trailing.equalTo(self.amountTextField.snp.trailing)
-        }
+    private func setupCountryImageViewConstraints() {
+        self.countryImageView.prepareForConstraints()
+        self.countryImageView.pinTop(8)
+        self.countryImageView.pinLeft(8)
+        self.countryImageView.pinBottom(8)
 
-        self.currencyCodeLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.top.equalToSuperview().offset(8)
-            make.trailing.equalToSuperview()
-        }
+        self.countryImageView.constraintWidth(toAnchor: self.widthAnchor, multiplier: 0.1)
+        self.countryImageView.squareViewConstraint()
+    }
 
-        self.currencyNameLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            make.leading.equalTo(self.currencyCodeLabel.snp.leading)
-            make.top.equalTo(self.currencyCodeLabel.snp.bottom)
-            make.bottom.equalToSuperview().inset(8)
-            make.trailing.equalTo(self.currencyCodeLabel.snp.trailing)
-        }
+    private func setupLabelsWrapperViewConstraints() {
+        self.labelswrapperView.prepareForConstraints()
+        self.labelswrapperView.pinLeftInRelationTo(heightAnchor: self.countryImageView.rightAnchor, constant: 8)
 
-        self.amountTextField.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(8)
-            make.centerY.equalTo(self.countryImageView.snp.centerY)
-            make.width.equalToSuperview().multipliedBy(0.45)
-        }
+        self.labelswrapperView.centerVertically(inRelationTo: self.countryImageView)
+
+        self.labelswrapperView.pinRightInRelationTo(heightAnchor: self.amountTextField.leftAnchor, constant: 0)
+    }
+
+    private func setupCurrencyCodeLabelConstraints() {
+        self.currencyCodeLabel.prepareForConstraints()
+        self.currencyCodeLabel.pinLeft()
+        self.currencyCodeLabel.pinTop(8)
+        self.currencyCodeLabel.pinRight()
+    }
+
+    private func setupCurrencyNameLabelConstraints() {
+        self.currencyNameLabel.prepareForConstraints()
+        self.currencyNameLabel.pinLeft()
+        self.currencyNameLabel.pinTop(0, target: self.currencyCodeLabel)
+        self.currencyNameLabel.pinRight()
+        self.currencyNameLabel.pinBottom(8)
+    }
+
+    private func setupAmountTextFieldConstraints() {
+        self.amountTextField.prepareForConstraints()
+        self.amountTextField.pinRight(8)
+        self.amountTextField.centerVertically(inRelationTo: self.countryImageView)
+        self.amountTextField.constraintWidth(toAnchor: self.widthAnchor, multiplier: 0.45)
     }
 
     func setupAdditionalConfiguration() {

@@ -6,39 +6,23 @@
 //  Copyright © 2019 Leonardo Piovezan. All rights reserved.
 //
 
-import Moya
-
 enum ExchangeRatesRouter {
     case getRatesFor(countryCode: String)
 }
 
-extension ExchangeRatesRouter: TargetType {
-    var baseURL: URL {
-        return URL(string: Constants.Network.baseURL)!
+extension ExchangeRatesRouter: Endpoint {
+    var parameters: [String : Any]? {
+        switch self {
+        case .getRatesFor(let currencyCode):
+            return ["base": currencyCode]
+        }
     }
 
     var path: String {
-        return "latest"
+        return "/latest"
     }
 
-    var method: Method {
-        return .get
-    }
-
-    var sampleData: Data {
-        return Data()
-    }
-
-    var task: Task {
-        switch self {
-        case .getRatesFor(let countryCode):
-            return Task.requestParameters(parameters: ["base": countryCode],
-                                          encoding: URLEncoding.queryString)
-        }
-
-    }
-
-    var headers: [String : String]? {
-        return nil
+    var base: String {
+        return Constants.Network.baseURL
     }
 }

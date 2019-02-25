@@ -9,8 +9,8 @@
 extension DefaultContainer {
     func registerServices() {
         self.container.register(ExchangeRatesService.self) { resolver in
-            let repository: ExchangeRatesRepository = resolver.resolve(ExchangeRatesRepository.self)!
-            return ExchangeRatesServiceImpl(exchangeRatesRepository: repository)
+            let client = resolver.resolve(APIClient.self)!
+            return ExchangeRatesServiceImpl(client: client)
         }
     }
 }
